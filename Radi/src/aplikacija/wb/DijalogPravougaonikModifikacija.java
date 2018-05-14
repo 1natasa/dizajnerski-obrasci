@@ -10,8 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import geometrija.Pravougaonik;
-import geometrija.Tacka;
+import model.Pravougaonik;
+import model.Point;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -67,7 +67,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 1 0,alignx center");
 			txtX.setColumns(10);
-			txtX.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getX());
+			txtX.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getTopLeftPoint().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
@@ -77,7 +77,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 1 1,alignx center");
 			txtY.setColumns(10);
-			txtY.setText(""+ ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getY());
+			txtY.setText(""+ ((Pravougaonik)GuiCrtanje.getSelektovan()).getTopLeftPoint().getY());
 		}
 		{
 			JLabel lblVisina = new JLabel("Visina:");
@@ -87,7 +87,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtVisina = new JTextField();
 			pnlKomande.add(txtVisina, "cell 1 2,alignx center");
 			txtVisina.setColumns(10);
-			txtVisina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getVisina());
+			txtVisina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getHeight());
 		}
 		{
 			JLabel lblSirina = new JLabel("Sirina:");
@@ -97,7 +97,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtSirina = new JTextField();
 			pnlKomande.add(txtSirina, "cell 1 3,alignx center");
 			txtSirina.setColumns(10);
-			txtSirina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getSirina());
+			txtSirina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getWidth());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -105,7 +105,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("");
-			 btnBojaKonture.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getBoja());
+			 btnBojaKonture.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getColor());
 			btnBojaKonture.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JColorChooser jcc = new JColorChooser();
@@ -122,7 +122,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("");
-			 btnBojaUnutrasnjosti.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
+			 btnBojaUnutrasnjosti.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getInsideColor());
 			btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -158,7 +158,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 							
 							else {
 								setVisible(false);
-								pr1= new Pravougaonik(new Tacka(x,y), sirina, visina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
+								pr1= new Pravougaonik(new Point(x,y), sirina, visina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							}
 							
 						} catch (Exception e1) {

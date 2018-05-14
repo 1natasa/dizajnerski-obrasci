@@ -11,8 +11,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.omg.PortableServer.ServantRetentionPolicyValue;
 
-import geometrija.Krug;
-import geometrija.Tacka;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +20,8 @@ import java.awt.Dialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import aplikacija.wb.GuiCrtanje;
+import model.Circle;
+import model.Point;
 public class DijalogKrugModifikacija extends JDialog {
 
 	
@@ -34,7 +34,7 @@ public class DijalogKrugModifikacija extends JDialog {
 	private int poluprecnik;
 	private JButton btnBojaKonture;
 	private JButton btnBojaUnutrasnjosti;
-	Krug k=null;
+	Circle k=null;
 	 
 	
 	
@@ -77,7 +77,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 4 2,alignx center");
 			txtX.setColumns(10);
-			txtX.setText(""+ ((Krug)GuiCrtanje.getSelektovan()).getCentar().getX());
+			txtX.setText(""+ ((Circle)GuiCrtanje.getSelektovan()).getCentar().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata centra:");
@@ -87,7 +87,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 4 3,alignx center");
 			txtY.setColumns(10);
-			txtY.setText("" + ((Krug)GuiCrtanje.getSelektovan()).getCentar().getY());
+			txtY.setText("" + ((Circle)GuiCrtanje.getSelektovan()).getCentar().getY());
 		}
 		{
 			JLabel lblPoluprecnik = new JLabel("Poluprecnik:");
@@ -97,7 +97,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			txtPoluprecnik = new JTextField();
 			pnlKomande.add(txtPoluprecnik, "cell 4 4,alignx center");
 			txtPoluprecnik.setColumns(10);
-			txtPoluprecnik.setText("" + ((Krug)GuiCrtanje.getSelektovan()).getR());
+			txtPoluprecnik.setText("" + ((Circle)GuiCrtanje.getSelektovan()).getR());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -105,7 +105,7 @@ public class DijalogKrugModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("");
-			 btnBojaKonture.setBackground(((Krug)GuiCrtanje.getSelektovan()).getBoja());
+			 btnBojaKonture.setBackground(((Circle)GuiCrtanje.getSelektovan()).getColor());
 			 btnBojaKonture.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent arg0) {
 			 		JColorChooser jcc = new JColorChooser();
@@ -122,7 +122,7 @@ public class DijalogKrugModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("");
-			 btnBojaUnutrasnjosti.setBackground(((Krug)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
+			 btnBojaUnutrasnjosti.setBackground(((Circle)GuiCrtanje.getSelektovan()).getInsideColor());
 			 btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		
@@ -155,7 +155,7 @@ public class DijalogKrugModifikacija extends JDialog {
 							
 							else{
 								setVisible(false);
-								k= new Krug(new Tacka (x,y), poluprecnik, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
+								k= new Circle(new Point (x,y), poluprecnik, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							}
 							
 						} catch (Exception e) {
@@ -173,7 +173,7 @@ public class DijalogKrugModifikacija extends JDialog {
 		}
 	}
 	
-	public Krug getPodaci()
+	public Circle getPodaci()
 	{
 		return k;
 	}

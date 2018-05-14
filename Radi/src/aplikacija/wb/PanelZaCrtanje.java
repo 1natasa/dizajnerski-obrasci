@@ -5,23 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import geometrija.Oblik;
+
+import model.Shape;
 
 public class PanelZaCrtanje extends JPanel {
-	private List<Oblik> oblici;
+	private List<Shape> oblici;
 	
 	public PanelZaCrtanje()
 	{
-		oblici=new ArrayList<Oblik>();
+		oblici=new ArrayList<Shape>();
 	}
 	
-	public void add(Oblik o){
+	public void add(Shape o){
 		
 		oblici.add(o);
 		repaint();
 	}
 	
-	public void remove(Oblik o)
+	public void remove(Shape o)
 	{
 		oblici.remove(o);
 		repaint();
@@ -31,9 +32,9 @@ public class PanelZaCrtanje extends JPanel {
 	{
 		System.out.println("osvezavam");
 		super.paintComponent(g);
-		for (Oblik o : oblici)
+		for (Shape o : oblici)
 		{
-			o.crtajSe(g);
+			o.drawShape(g);
 		}
 	}
 }

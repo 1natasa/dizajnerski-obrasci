@@ -22,13 +22,6 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Stack;
-
-import geometrija.Tacka;
-import geometrija.Linija;
-import geometrija.Krug;
-import geometrija.Kvadrat;
-import geometrija.Pravougaonik;
-import geometrija.Oblik;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -44,25 +37,31 @@ import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import aplikacija.wb.PanelZaCrtanje;
+import model.Circle;
+import model.Square;
+import model.Line;
+import model.Shape;
+import model.Pravougaonik;
+import model.Point;
 
 public class GuiCrtanje extends JFrame {
 	
 	private int xTacka;
 	private int yTacka;
-	Tacka t1;
-	Linija l1;
-	Kvadrat kv1;
+	Point t1;
+	Line l1;
+	Square kv1;
 	Pravougaonik pr1;
-	Krug kr1;
+	Circle kr1;
 	
 	
 	private PanelZaCrtanje crtanje;
 	private JButton btnOdabranoDugme;
-	private Oblik oblik=null;
+	private Shape oblik=null;
 	private JButton btnObrisi;
-	static Oblik selektovan = null;
+	static Shape selektovan = null;
 	DijalogTackaModifikacija dt;
-	 private Stack<Oblik>stek = new Stack<Oblik>();
+	 private Stack<Shape>stek = new Stack<Shape>();
 	
 	
 	int klik = 1;
@@ -276,8 +275,8 @@ public class GuiCrtanje extends JFrame {
 				{
 					xTacka=e.getX();
 					yTacka=e.getY();
-					t1 = new Tacka (xTacka, yTacka, btnKontura.getBackground());
-					t1.crtajSe(crtanje.getGraphics());
+					t1 = new Point (xTacka, yTacka, btnKontura.getBackground());
+					t1.drawShape(crtanje.getGraphics());
 					crtanje.add(t1);
 					stek.push(t1);
 					//System.out.println("uso u if");
@@ -296,8 +295,8 @@ public class GuiCrtanje extends JFrame {
 						 int yTacka1=e.getY();
 						 
 						 System.out.println(btnKontura.getBackground());
-						 l1 = new Linija( new Tacka(xTacka,yTacka), new Tacka(xTacka1,yTacka1),btnKontura.getBackground());
-						 l1.crtajSe(crtanje.getGraphics());
+						 l1 = new Line( new Point(xTacka,yTacka), new Point(xTacka1,yTacka1),btnKontura.getBackground());
+						 l1.drawShape(crtanje.getGraphics());
 						 crtanje.add(l1);
 						 stek.push(l1);
 						 
@@ -314,9 +313,9 @@ public class GuiCrtanje extends JFrame {
 					yTacka=e.getY();
 					DijalogKvadrataCrtanje dk = new DijalogKvadrataCrtanje();
 					dk.setVisible(true);
-					kv1=new Kvadrat(new Tacka(xTacka, yTacka), dk.getDuzinaStranice(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
+					kv1=new Square(new Point(xTacka, yTacka), dk.getDuzinaStranice(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 					
-					kv1.crtajSe(crtanje.getGraphics());
+					kv1.drawShape(crtanje.getGraphics());
 					crtanje.add(kv1);
 					stek.push(kv1);
 				}
@@ -328,8 +327,8 @@ public class GuiCrtanje extends JFrame {
 						
 						DijalogPravougaonikCrtanje dijalogPravougaonik = new DijalogPravougaonikCrtanje();
 						dijalogPravougaonik.setVisible(true);
-						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getSirina(),dijalogPravougaonik.getDuzina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
-						pr1.crtajSe(crtanje.getGraphics());
+						pr1= new Pravougaonik(new Point(xTacka, yTacka), dijalogPravougaonik.getSirina(),dijalogPravougaonik.getDuzina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
+						pr1.drawShape(crtanje.getGraphics());
 						crtanje.add(pr1);
 						stek.push(pr1);
 					
@@ -341,9 +340,9 @@ public class GuiCrtanje extends JFrame {
 					//repaint();
 					DijalogKrugCrtanje dijalogKrug= new DijalogKrugCrtanje();
 					dijalogKrug.setVisible(true);
-					kr1= new Krug(new Tacka(xTacka, yTacka), dijalogKrug.getPoluprecnik(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
+					kr1= new Circle(new Point(xTacka, yTacka), dijalogKrug.getPoluprecnik(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 					System.out.println(dijalogKrug.getPoluprecnik());
-					kr1.crtajSe(crtanje.getGraphics());
+					kr1.drawShape(crtanje.getGraphics());
 					crtanje.add(kr1);
 					stek.push(kr1);		
 					
@@ -353,7 +352,7 @@ public class GuiCrtanje extends JFrame {
 					btnModifikacija.setEnabled(false);
 					btnObrisi.setEnabled(false);
 					if(selektovan!= null){
-						selektovan.setSelektovan(false);
+						selektovan.setSelected(false);
 						//selektovan=null;
 						repaint();
 					}
@@ -365,11 +364,11 @@ public class GuiCrtanje extends JFrame {
 				
 					for(int i = stek.size() - 1; i >= 0  ; i--)
 					{
-						if(stek.elementAt(i).sadrzi(xTacka, yTacka)){
+						if(stek.elementAt(i).contains(xTacka, yTacka)){
 							
 							selektovan = stek.elementAt(i);
 							
-							selektovan.setSelektovan(true);
+							selektovan.setSelected(true);
 							
 							//repaint();
 							
@@ -402,7 +401,7 @@ public class GuiCrtanje extends JFrame {
 		btnModifikacija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if (selektovan instanceof Tacka)
+				if (selektovan instanceof Point)
 				{
 					
 					
@@ -421,14 +420,14 @@ public class GuiCrtanje extends JFrame {
 					crtanje.remove(selektovan);
 					t1=dt.getPodaci();
 					repaint();
-					t1.crtajSe(crtanje.getGraphics());
+					t1.drawShape(crtanje.getGraphics());
 					crtanje.add(t1);
 					stek.push(t1);
 					selektovan=null;
 				     }
 					
 				}
-				else if (selektovan instanceof Linija)
+				else if (selektovan instanceof Line)
 				{
 					
 					DijalogLinija dl = new DijalogLinija();
@@ -446,7 +445,7 @@ public class GuiCrtanje extends JFrame {
 				//	ponovoCrtaNakonIzmena();
 					crtanje.repaint();
 					
-					l1.crtajSe(crtanje.getGraphics());
+					l1.drawShape(crtanje.getGraphics());
 					crtanje.add(l1);
 					stek.push(l1);
 					
@@ -468,7 +467,7 @@ public class GuiCrtanje extends JFrame {
 					pr1=dpp.getPodaci();
 					//ponovoCrtaNakonIzmena();
 					repaint();
-					pr1.crtajSe(crtanje.getGraphics());
+					pr1.drawShape(crtanje.getGraphics());
 					crtanje.add(pr1);
 					stek.push(pr1);
 					selektovan=null;
@@ -477,7 +476,7 @@ public class GuiCrtanje extends JFrame {
 				}
 				
 				
-				else if (selektovan instanceof Kvadrat) {
+				else if (selektovan instanceof Square) {
 					
 					
 					
@@ -496,13 +495,13 @@ public class GuiCrtanje extends JFrame {
 					kv1=dk.getPodaci();
 					//ponovoCrtaNakonIzmena();
 					repaint();
-					kv1.crtajSe(crtanje.getGraphics());
+					kv1.drawShape(crtanje.getGraphics());
 					crtanje.add(kv1);
 					stek.push(kv1);
 					selektovan=null;
 					}
 					
-				}  else if (selektovan instanceof Krug)
+				}  else if (selektovan instanceof Circle)
 					
 				{
 					DijalogKrugModifikacija dk= new DijalogKrugModifikacija();
@@ -519,7 +518,7 @@ public class GuiCrtanje extends JFrame {
 					kr1=dk.getPodaci();
 				//	ponovoCrtaNakonIzmena();
 					repaint();
-					kr1.crtajSe(crtanje.getGraphics());
+					kr1.drawShape(crtanje.getGraphics());
 					crtanje.add(kr1);
 					stek.push(kr1);
 					selektovan=null;
@@ -541,7 +540,7 @@ public class GuiCrtanje extends JFrame {
 		
 	}
 	
-	static Oblik getSelektovan(){
+	static Shape getSelektovan(){
 		return selektovan;
 	}
 	

@@ -1,18 +1,16 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
-import geometrija.Kvadrat;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Square;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import geometrija.Kvadrat;
-
-
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
@@ -95,17 +93,17 @@ public class GuiSortiranje extends JFrame {
 		gbc_listSortirana.gridy = 2;
 		panel.add(listSortirana, gbc_listSortirana);
 		
-		ArrayList<Kvadrat> lista = new ArrayList<Kvadrat>();
+		ArrayList<Square> lista = new ArrayList<Square>();
 		
 		JButton btnDodajUListu = new JButton("Dodaj u listu");
 		btnDodajUListu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DijalogKvadratStek dk = new DijalogKvadratStek();
 				dk.setVisible(true);
-				Kvadrat k = dk.getPodaci();
+				Square k = dk.getPodaci();
 				if (k != null)
 				{
-				listNesortirana.add(k.opis());
+				listNesortirana.add(k.description());
 				}
 				
 				lista.add(dk.getPodaci());
@@ -113,8 +111,8 @@ public class GuiSortiranje extends JFrame {
 				
 				listSortirana.removeAll();
 				
-				for(Kvadrat k1 : lista){
-					listSortirana.add(k1.opis());
+				for(Square k1 : lista){
+					listSortirana.add(k1.description());
 				}
 				
 			}

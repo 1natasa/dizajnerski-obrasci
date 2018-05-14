@@ -1,19 +1,21 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
-import geometrija.Pravougaonik;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Pravougaonik;
+import model.Point;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import geometrija.Tacka;
 
 public class DijalogPravougaonikCrtanje extends JDialog {
 

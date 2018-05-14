@@ -10,8 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import geometrija.Kvadrat;
-import geometrija.Tacka;
+import model.Square;
+import model.Point;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,7 +38,7 @@ public class DijalogKvadratStek extends JDialog {
 	
 	
 	boolean dugmeOK=false;
-	Kvadrat k = null;
+	Square k = null;
 	/**
 	 * Launch the application.
 	 */
@@ -124,7 +124,7 @@ public class DijalogKvadratStek extends JDialog {
 							JOptionPane.showMessageDialog(null, "Greska! broj mora biti pozitivan");
 						}else{
 							System.out.println(bojaIvice);
-							k = new Kvadrat(new Tacka(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()),bojaIvice,bojaUnutrasnjosti);
+							k = new Square(new Point(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()),bojaIvice,bojaUnutrasnjosti);
 							setVisible(false);
 						}
 
@@ -154,7 +154,7 @@ public class DijalogKvadratStek extends JDialog {
 
 	}
 	
-	public Kvadrat getPodaci(){
+	public Square getPodaci(){
 
 		System.out.println("Podaci");
 	

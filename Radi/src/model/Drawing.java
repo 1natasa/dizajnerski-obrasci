@@ -1,4 +1,4 @@
-package geometrija;
+package model;
 
 import java.awt.Graphics;
 
@@ -8,12 +8,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Stack;
 
-public class Crtez extends JPanel{
+public class Drawing extends JPanel{
 	//public Stack<Oblik> stek = new Stack<Oblik>();
 	int x;
 	int y;
 	int i;
-	public Crtez() {
+	public Drawing() {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -24,12 +24,12 @@ public class Crtez extends JPanel{
 	}
 	
 	public static void main(String[] args){
-		JFrame prozor = new JFrame("Crtanje");
-		prozor.setSize(800, 600);
-		Crtez c = new Crtez();
-		prozor.getContentPane().add(c);
-		prozor.setVisible(true);
-		prozor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame window = new JFrame("Crtanje");
+		window.setSize(800, 600);
+		Drawing c = new Drawing();
+		window.getContentPane().add(c);
+		window.setVisible(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void paint(Graphics g){

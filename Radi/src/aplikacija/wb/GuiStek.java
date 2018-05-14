@@ -8,11 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Square;
+
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import geometrija.Kvadrat;
-
 import java.util.Stack;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,8 +23,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.List;
 public class GuiStek extends JFrame {
-	 private Stack <Kvadrat> StekKvadrat = new Stack<Kvadrat>();
-	Kvadrat kv1 = new Kvadrat();
+	 private Stack <Square> StekKvadrat = new Stack<Square>();
+	Square kv1 = new Square();
 
 	private JPanel pnlGlavni;
 	List list;
@@ -79,10 +80,10 @@ public class GuiStek extends JFrame {
 				DijalogKvadratStek dk = new DijalogKvadratStek();
 				dk.setVisible(true); 
 				System.out.println("sledeca naredba");
-				Kvadrat k = dk.getPodaci();
+				Square k = dk.getPodaci();
 			
 				if(k != null)
-					list.add(k.opis(), 0);
+					list.add(k.description(), 0);
 			
 			}
 		});
