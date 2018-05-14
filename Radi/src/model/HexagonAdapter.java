@@ -15,6 +15,7 @@ public class HexagonAdapter extends SurfaceShape{
 		hexagon.setAreaColor(insideColor); //setAreaColor je funkcija iz Hexagona
 		
 		
+		
 	}
 	
 	//povrsina heksagona
