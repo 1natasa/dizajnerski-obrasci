@@ -1,50 +1,22 @@
-package model;
+package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import hexagon.Hexagon;
 
-public class HexagonAdapter extends SurfaceShape{
+public class HexagonAdapter extends SurfaceShape implements Moveable{
 
 	private Hexagon hexagon;
+	
 	
 	public HexagonAdapter(Point p, int r, Color contourColor,Color insideColor ) {
 		hexagon= new Hexagon (p.getX(), p.getY(),r);
 		hexagon.setBorderColor(contourColor); //setBorderColor je funckija iz Hexagona
 		hexagon.setAreaColor(insideColor); //setAreaColor je funkcija iz Hexagona
 		
-		
-		
 	}
 	
-	//povrsina heksagona
-	//moramo da konvertujemo u int zato sto math.sqrt vraca decimalan broj
-	public int area()
-	{
-		return (int)((6*hexagon.getR()*hexagon.getR()*Math.sqrt(3))/4);
-	}
-	
-	//obim heksagona
-	
-	public int parimeter()
-	{
-		return 6* hexagon.getR();
-	}
-	
-	
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		//extraHexagon je dodatni heksagon, pomocni
-		if(o instanceof Hexagon) {
-			HexagonAdapter extraHexagon = (HexagonAdapter) o;
-			return (int)(this.area() - extraHexagon.area());
-		}
-		else
-			return 0;
-		
-	}
 
 	@Override
 	public void fill(Graphics g) {
@@ -83,16 +55,38 @@ public class HexagonAdapter extends SurfaceShape{
 		hexagon.setY(hexagon.getY()+y);
 	}
 
-	public Hexagon getHexagon() {
-		return hexagon;
-	}
-
-	public void setHexagon(Hexagon hexagon) {
-		this.hexagon = hexagon;
+	
+	public int getR ()
+	{
+		return hexagon.getR();
 	}
 	
 	
+	public void setR(int r)
+	{
+		hexagon.setR(r);
+	}
 	
+	
+	public int getX ()
+	{
+		return hexagon.getX();
+	}
 	
 
+	public void setX(int x)
+	{
+		hexagon.setX(x);
+	}
+	
+	public int getY ()
+	{
+		return hexagon.getY();
+	}
+	
+
+	public void setY(int y)
+	{
+		hexagon.setY(y);
+	}
 }

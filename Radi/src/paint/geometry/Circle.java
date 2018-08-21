@@ -1,4 +1,4 @@
-package model;
+package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -68,14 +68,7 @@ public class Circle extends SurfaceShape implements Moveable{
 		g.fillOval(center.getX()-r, center.getY()-r, 2*r+1, r*2+1);
 	}
 
-	public int compareTo(Object o) {
-		if(o instanceof Circle){
-			Circle extra  = (Circle) o;
-			return this.r - extra.r;
-		}
-		else
-			return 0;
-	}
+	
 	public Point getCentar() {
 		return center;
 	}

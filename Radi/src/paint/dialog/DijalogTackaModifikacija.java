@@ -1,4 +1,4 @@
-package aplikacija.wb;
+package paint.dialog;
 
 import java.awt.BorderLayout;
 
@@ -18,11 +18,12 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import net.miginfocom.swing.MigLayout;
+import paint.geometry.Point;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import aplikacija.wb.GuiCrtanje;
-import model.Point;
+import paint.mvc.PaintFrame;
 
 
 public class DijalogTackaModifikacija extends JDialog {
@@ -34,28 +35,11 @@ public class DijalogTackaModifikacija extends JDialog {
 
 	private int x;
 	private int y;
-	Color bojaKonture;
-	Point tacka ;
-	Point t1= new Point();
-	JButton btnBojaKonture;
+	private Color bojaKonture;
+	private Point newPoint;
+	private JButton btnBojaKonture;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DijalogTackaModifikacija dialog = new DijalogTackaModifikacija();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public DijalogTackaModifikacija() {
+	public DijalogTackaModifikacija(Point point) {
 		
 		setModal(true);
 		
@@ -75,7 +59,7 @@ public class DijalogTackaModifikacija extends JDialog {
 			pnlDugmici.add(txtX, "cell 4 2,alignx left,aligny center");
 			txtX.setColumns(10);
 			
-			txtX.setText("" + ((Point) GuiCrtanje.getSelektovan()).getX());
+			txtX.setText("" + point.getX());
 		
 			
 		
@@ -88,7 +72,7 @@ public class DijalogTackaModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlDugmici.add(txtY, "cell 4 3,alignx left,aligny center");
 			txtY.setColumns(10);
-			txtY.setText("" + ((Point) GuiCrtanje.getSelektovan()).getY());
+			txtY.setText("" + point.getY());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -96,8 +80,7 @@ public class DijalogTackaModifikacija extends JDialog {
 		}
 		{
 			btnBojaKonture = new JButton("");
-			System.out.println(((Point) GuiCrtanje.getSelektovan()).getColor());
-			btnBojaKonture.setBackground(((Point) GuiCrtanje.getSelektovan()).getColor());
+			btnBojaKonture.setBackground(point.getColor());
 			btnBojaKonture.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JColorChooser jcc = new JColorChooser();
@@ -131,7 +114,7 @@ public class DijalogTackaModifikacija extends JDialog {
 							}
 							
 							else {
-								tacka= new Point (x,y,btnBojaKonture.getBackground());
+								newPoint= new Point (x,y,btnBojaKonture.getBackground());
 								setVisible(false);
 							}
 						} catch (Exception e1) {
@@ -153,7 +136,7 @@ public class DijalogTackaModifikacija extends JDialog {
 	
 	public Point getPodaci()
 	{
-		return tacka;
+		return newPoint;
 	}
 
 	

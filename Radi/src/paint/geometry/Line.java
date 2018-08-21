@@ -1,4 +1,4 @@
-package model;
+package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -24,10 +24,6 @@ public class Line extends Shape implements Moveable{
 		int middleX = (tStart.getX() + tEnd.getX()) / 2;
 		int middleY = (tStart.getY() + tEnd.getY()) / 2;
 		return new Point(middleX, middleY);
-	}
-
-	public String toString(){
-		return "("+tStart.getX()+"," +tStart.getY()+") --> (" + tEnd.getX()+","+ tEnd.getY() + ")";
 	}
 
 	public boolean equals(Object obj){
@@ -85,17 +81,7 @@ public class Line extends Shape implements Moveable{
 		if(isSelected())
 			selected(g);
 	}
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		if(o instanceof Line){
-			Line extraLine  = (Line) o;
-			
-			return (int) (this.lenght()-extraLine.lenght());
 
-		}
-		else
-			return 0;
-	}
 	
 	public Point getStart(){
 		return tStart;

@@ -1,25 +1,25 @@
-package model;
+package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Pravougaonik extends Square{
+public class Rectangle extends Square{
 	private int width;
 
 
-	public Pravougaonik(){
+	public Rectangle(){
 
 	}
-	public Pravougaonik(Point topLeftPoint, int width, int height){
+	public Rectangle(Point topLeftPoint, int width, int height){
 		super(topLeftPoint, height);
 		this.width = width;
 	}
-	public Pravougaonik(Point topLeftPoint, int width, int height, Color color){
+	public Rectangle(Point topLeftPoint, int width, int height, Color color){
 		this(topLeftPoint, width, height);
 		setColor(color);
 	}
 
-	public Pravougaonik(Point topLeftPoint, int width, int height, Color contourColor, Color insideColor){
+	public Rectangle(Point topLeftPoint, int width, int height, Color contourColor, Color insideColor){
 		this(topLeftPoint, width, height, contourColor);
 		setInsideColor(insideColor);
 	}
@@ -42,13 +42,11 @@ public class Pravougaonik extends Square{
 		return diagonal().middleOfLine();
 	}
 
-	public String toString(){
-		return "Gornji levi ugao="+topLeftPoint+",sirina="+width+",visina="+sideLength;
-	}
+
 
 	public boolean equals(Object obj){
-		if(obj instanceof Pravougaonik){
-			Pravougaonik extra=(Pravougaonik) obj;
+		if(obj instanceof Rectangle){
+			Rectangle extra=(Rectangle) obj;
 			if(this.topLeftPoint.equals(extra.topLeftPoint) && this.sideLength==extra.sideLength && this.width==extra.width)
 				return true;
 			else
@@ -107,8 +105,7 @@ public class Pravougaonik extends Square{
 			this.sideLength = height;
 	}
 	public void setWidth(int width) {
-		
-		
+
 			this.width = width;
 		
 	}

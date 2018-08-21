@@ -1,4 +1,4 @@
-package aplikacija.wb;
+package paint.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,8 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import model.Pravougaonik;
-import model.Point;
+import paint.geometry.Point;
+import paint.geometry.Rectangle;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 	private int y;
 	protected int sirina;
 	protected int visina;
-	Pravougaonik pravougaonik=null;
+	Rectangle pravougaonik=null;
 	
 
 	/**

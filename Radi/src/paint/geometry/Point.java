@@ -1,4 +1,4 @@
-package model;
+package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -26,7 +26,6 @@ public class Point extends Shape implements Moveable{
 
 	public boolean equals(Object obj){
 		if(obj instanceof Point){
-			//pomocna
 			Point extraPoint=(Point) obj;
 			if(x==extraPoint.getX() && y==extraPoint.getY())
 				return true;
@@ -63,7 +62,7 @@ public class Point extends Shape implements Moveable{
 
 	}
 	public void selected(Graphics g){
-		g.setColor(findColor("blue"));
+		g.setColor(Color.BLUE);
 		g.drawRect(this.getX()-3, this.getY()-3, 6, 6);
 	}
 	public void drawShape(Graphics g) {
@@ -74,23 +73,6 @@ public class Point extends Shape implements Moveable{
 			selected(g);
 
 	}
-
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		if(o instanceof Point){
-			Point extraPoint  = (Point) o;
-			Point zeroPoint = new Point(0, 0);
-			Point secondExtraPoint = new Point(x, y);
-			int extraPoint1 = (int) zeroPoint.distance(secondExtraPoint);
-			int extraPoint2 = (int) zeroPoint.distance(extraPoint);
-
-			return extraPoint1 - extraPoint2;
-
-		}
-		else
-			return 0;
-	}
-
 
 	public int getX(){
 		return x;
@@ -104,8 +86,6 @@ public class Point extends Shape implements Moveable{
 			x = newX;
 	}
 	public void setY(int newY){
-		
-	
 			y = newY;
 	}
 	

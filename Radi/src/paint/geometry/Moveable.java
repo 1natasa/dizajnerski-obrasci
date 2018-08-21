@@ -1,4 +1,4 @@
-package model;
+package paint.geometry;
 
 public interface Moveable {
 	public abstract void moveTo(int x, int y)  ;

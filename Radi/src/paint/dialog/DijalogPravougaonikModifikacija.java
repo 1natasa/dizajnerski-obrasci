@@ -1,4 +1,4 @@
-package aplikacija.wb;
+package paint.dialog;
 
 import java.awt.BorderLayout;
 
@@ -10,9 +10,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import model.Pravougaonik;
-import model.Point;
 import net.miginfocom.swing.MigLayout;
+import paint.geometry.Point;
+import paint.geometry.Rectangle;
+import paint.mvc.PaintFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,32 +29,16 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 	private JTextField txtY;
 	private JTextField txtVisina;
 	private JTextField txtSirina;
-	JButton btnBojaKonture;
-	JButton btnBojaUnutrasnjosti;
+	private JButton btnBojaKonture;
+	private JButton btnBojaUnutrasnjosti;
 	private int x;
 	private int y;
 	private int visina;
 	private int sirina;
-	Pravougaonik pr1=null;
+	private Rectangle newRectangle;
 	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DijalogPravougaonikModifikacija dialog = new DijalogPravougaonikModifikacija();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public DijalogPravougaonikModifikacija() {
+	public DijalogPravougaonikModifikacija(Rectangle rectangle) {
 		setModal(true);
 		setBounds(100, 100, 358, 264);
 		getContentPane().setLayout(new BorderLayout());
@@ -67,7 +53,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 1 0,alignx center");
 			txtX.setColumns(10);
-			txtX.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getTopLeftPoint().getX());
+			txtX.setText("" + rectangle.getTopLeftPoint().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
@@ -77,7 +63,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 1 1,alignx center");
 			txtY.setColumns(10);
-			txtY.setText(""+ ((Pravougaonik)GuiCrtanje.getSelektovan()).getTopLeftPoint().getY());
+			txtY.setText(""+ rectangle.getTopLeftPoint().getY());
 		}
 		{
 			JLabel lblVisina = new JLabel("Visina:");
@@ -87,7 +73,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtVisina = new JTextField();
 			pnlKomande.add(txtVisina, "cell 1 2,alignx center");
 			txtVisina.setColumns(10);
-			txtVisina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getHeight());
+			txtVisina.setText("" + rectangle.getHeight());
 		}
 		{
 			JLabel lblSirina = new JLabel("Sirina:");
@@ -97,7 +83,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtSirina = new JTextField();
 			pnlKomande.add(txtSirina, "cell 1 3,alignx center");
 			txtSirina.setColumns(10);
-			txtSirina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getWidth());
+			txtSirina.setText("" + rectangle.getWidth());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -105,7 +91,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("");
-			 btnBojaKonture.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getColor());
+			 btnBojaKonture.setBackground(rectangle.getColor());
 			btnBojaKonture.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JColorChooser jcc = new JColorChooser();
@@ -122,7 +108,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("");
-			 btnBojaUnutrasnjosti.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getInsideColor());
+			 btnBojaUnutrasnjosti.setBackground(rectangle.getInsideColor());
 			btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -158,7 +144,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 							
 							else {
 								setVisible(false);
-								pr1= new Pravougaonik(new Point(x,y), sirina, visina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
+								newRectangle= new Rectangle(new Point(x,y), sirina, visina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							}
 							
 						} catch (Exception e1) {
@@ -177,10 +163,10 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 	}
 	
-	public Pravougaonik getPodaci()
+	public Rectangle getPodaci()
 	{
 		
-		return pr1;
+		return newRectangle;
 	}
 
 }

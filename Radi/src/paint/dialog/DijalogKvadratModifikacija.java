@@ -1,4 +1,4 @@
-package aplikacija.wb;
+package paint.dialog;
 
 import java.awt.BorderLayout;
 
@@ -10,9 +10,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import model.Square;
-import model.Point;
 import net.miginfocom.swing.MigLayout;
+import paint.geometry.Point;
+import paint.geometry.Square;
+import paint.mvc.PaintFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -31,26 +33,9 @@ public class DijalogKvadratModifikacija extends JDialog {
 	private int duzinaStranice;
 	JButton btnBojaKonture;
 	JButton btnBojaUnutrasnjosti;
-	Square k1=null;
+	private Square newSqaure;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DijalogKvadratModifikacija dialog = new DijalogKvadratModifikacija();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public DijalogKvadratModifikacija() {
+	public DijalogKvadratModifikacija(Square square) {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -65,7 +50,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 2 0,alignx center");
 			txtX.setColumns(10);
-			txtX.setText("" + ((Square)GuiCrtanje.getSelektovan()).getTopLeftPoint().getX());
+			txtX.setText("" + square.getTopLeftPoint().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
@@ -75,7 +60,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 2 1,alignx center");
 			txtY.setColumns(10);
-			txtY.setText("" + ((Square)GuiCrtanje.getSelektovan()).getTopLeftPoint().getY());
+			txtY.setText("" + square.getTopLeftPoint().getY());
 		}
 		{
 			JLabel lblDuzinaStranice = new JLabel("Duzina stranice:");
@@ -85,7 +70,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			txtDuzinaStranice = new JTextField();
 			pnlKomande.add(txtDuzinaStranice, "cell 2 2,alignx center");
 			txtDuzinaStranice.setColumns(10);
-			txtDuzinaStranice.setText(""+((Square)GuiCrtanje.getSelektovan()).getSideLength());
+			txtDuzinaStranice.setText(""+square.getSideLength());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -93,7 +78,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("");
-			 btnBojaKonture.setBackground(((Square)GuiCrtanje.getSelektovan()).getColor());
+			 btnBojaKonture.setBackground(square.getColor());
 			 btnBojaKonture.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		JColorChooser jcc = new JColorChooser();
@@ -112,7 +97,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("");
-			 btnBojaUnutrasnjosti.setBackground(((Square)GuiCrtanje.getSelektovan()).getInsideColor());
+			 btnBojaUnutrasnjosti.setBackground(square.getInsideColor());
 			 btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		
@@ -148,7 +133,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 							else
 							{
 								setVisible(false);
-								k1= new Square(new Point(x,y), duzinaStranice, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
+								newSqaure= new Square(new Point(x,y), duzinaStranice, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							}
 							
 						} catch (Exception e) {
@@ -168,7 +153,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 	
 	public Square getPodaci()
 	{
-		return k1;
+		return newSqaure;
 		
 	}
 
