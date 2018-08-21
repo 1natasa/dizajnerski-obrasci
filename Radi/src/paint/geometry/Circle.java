@@ -57,7 +57,6 @@ public class Circle extends SurfaceShape implements Moveable{
 		new Line(new Point(center.getX()-r, center.getY()), new Point(center.getX()+r, center.getY())).selected(g);
 	}
 	public void drawShape(Graphics g){
-		fill(g);
 		g.setColor(getColor());
 		g.drawOval(center.getX()-r, center.getY()-r, 2*r, r*2);
 		if(isSelected())
@@ -65,7 +64,7 @@ public class Circle extends SurfaceShape implements Moveable{
 	}
 	public void fill(Graphics g){
 		g.setColor(getInsideColor());
-		g.fillOval(center.getX()-r, center.getY()-r, 2*r+1, r*2+1);
+		g.fillOval(center.getX()-r, center.getY()-r, 2*r, r*2);
 	}
 
 	

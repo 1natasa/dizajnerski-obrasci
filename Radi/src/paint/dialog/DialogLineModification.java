@@ -21,9 +21,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DijalogLinija extends JDialog {
+public class DialogLineModification extends JDialog {
 
-	private final JPanel pnlKomande = new JPanel();
+	private final JPanel pnlCommands = new JPanel();
 	private JTextField txtX1;
 	private JTextField txtY1;
 	private JTextField txtX2;
@@ -33,83 +33,83 @@ public class DijalogLinija extends JDialog {
 	private int x2;
 	private int y2;
 	private Line newLine;
-	private JButton btnBojaLinije;
+	private JButton btnOutsideColor;
 	
 
 	
-	public DijalogLinija(Line line) {
+	public DialogLineModification(Line line) {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[][][][][grow]", "[][][][][][][]"));
+		pnlCommands.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlCommands, BorderLayout.CENTER);
+		pnlCommands.setLayout(new MigLayout("", "[][][][][grow]", "[][][][][][][]"));
 		{
-			JLabel lblX1 = new JLabel("X koordinatu prve tacke:");
-			pnlKomande.add(lblX1, "cell 3 2,alignx left");
+			JLabel lblX1 = new JLabel("X coordinate of first point:");
+			pnlCommands.add(lblX1, "cell 3 2,alignx left");
 		}
 		{
 			txtX1 = new JTextField();
-			pnlKomande.add(txtX1, "cell 4 2,alignx center");
+			pnlCommands.add(txtX1, "cell 4 2,alignx center");
 			txtX1.setColumns(10);
 			txtX1.setText("" + line.getStart().getX());
 		}
 		{
-			JLabel lblY1 = new JLabel("Y koordinatu prve tacke:");
-			pnlKomande.add(lblY1, "cell 3 3,alignx left");
+			JLabel lblY1 = new JLabel("Y coordinate of first point:");
+			pnlCommands.add(lblY1, "cell 3 3,alignx left");
 		}
 		{
 			txtY1 = new JTextField();
-			pnlKomande.add(txtY1, "cell 4 3,alignx center");
+			pnlCommands.add(txtY1, "cell 4 3,alignx center");
 			txtY1.setColumns(10);
 			txtY1.setText(""  + line.getStart().getY());
 		}
 		{
-			JLabel lblX2 = new JLabel("X koordinata druge tacke:");
-			pnlKomande.add(lblX2, "cell 3 4,alignx left");
+			JLabel lblX2 = new JLabel("X coordinate of second point:");
+			pnlCommands.add(lblX2, "cell 3 4,alignx left");
 		}
 		{
 			txtX2 = new JTextField();
-			pnlKomande.add(txtX2, "cell 4 4,alignx center");
+			pnlCommands.add(txtX2, "cell 4 4,alignx center");
 			txtX2.setColumns(10);
 			txtX2.setText("" + line.getEnd().getX());
 		}
 		{
-			JLabel lblY2 = new JLabel("Y koordinata druge tacke:");
-			pnlKomande.add(lblY2, "cell 3 5,alignx left");
+			JLabel lblY2 = new JLabel("Y coordinate of second point:");
+			pnlCommands.add(lblY2, "cell 3 5,alignx left");
 		}
 		{
 			txtY2 = new JTextField();
-			pnlKomande.add(txtY2, "cell 4 5,alignx center");
+			pnlCommands.add(txtY2, "cell 4 5,alignx center");
 			txtY2.setColumns(10);
 			txtY2.setText("" +line.getEnd().getY());
 		}
 		{
-			JLabel lblBoja = new JLabel("Boja:");
-			pnlKomande.add(lblBoja, "cell 3 6,alignx left");
+			JLabel lblColor = new JLabel("Color:");
+			pnlCommands.add(lblColor, "cell 3 6,alignx left");
 		}
 		{
-			btnBojaLinije = new JButton("");
-			btnBojaLinije.setBackground(Color.BLACK);
+			btnOutsideColor = new JButton("");
+			btnOutsideColor.setBackground(Color.BLACK);
 		
-			btnBojaLinije.setBackground(line.getColor());
+			btnOutsideColor.setBackground(line.getColor());
 
-			btnBojaLinije.addActionListener(new ActionListener() {
+			btnOutsideColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
 					JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.BLACK);
-					btnBojaLinije.setBackground(izborBoje);
+					Color izborBoje =jcc.showDialog(null, "Choose outside color", Color.BLACK);
+					btnOutsideColor.setBackground(izborBoje);
 				}
 			});
-			pnlKomande.add(btnBojaLinije, "cell 4 6,alignx center");
+			pnlCommands.add(btnOutsideColor, "cell 4 6,alignx center");
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -121,12 +121,12 @@ public class DijalogLinija extends JDialog {
 							
 							if (x1<=0 || y1<=0 || x2<=0 || y2<=0)
 							{
-								System.out.println("Greska pri unosu, negativan broj");
-								JOptionPane.showMessageDialog(null, "Greska, broj je negativan");
+								//System.out.println("Greska pri unosu, negativan broj");
+								JOptionPane.showMessageDialog(null, "Wrong entry, number must be positive");
 							}
 							else
 							{
-								newLine=new Line (new Point (x1,y1), new Point (x2,y2), btnBojaLinije.getBackground());
+								newLine=new Line (new Point (x1,y1), new Point (x2,y2), btnOutsideColor.getBackground());
 								setVisible(false);
 							}
 							
@@ -135,8 +135,8 @@ public class DijalogLinija extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							System.out.println("greska pri unosu, nije unet broj");
-							JOptionPane.showMessageDialog(null, "Greska, nije unet broj!!");
+							//System.out.println("greska pri unosu, nije unet broj");
+							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 					}
 				});
@@ -147,7 +147,7 @@ public class DijalogLinija extends JDialog {
 		}
 	}
 
-	public Line getPodaci()
+	public Line getData()
 	{
 		return newLine;
 	}

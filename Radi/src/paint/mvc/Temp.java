@@ -1,13 +1,13 @@
 package paint.mvc;
 
-import paint.dialog.DijalogKrugCrtanje;
-import paint.dialog.DijalogKrugModifikacija;
-import paint.dialog.DijalogKvadratModifikacija;
-import paint.dialog.DijalogKvadrataCrtanje;
-import paint.dialog.DijalogLinija;
-import paint.dialog.DijalogPravougaonikCrtanje;
-import paint.dialog.DijalogPravougaonikModifikacija;
-import paint.dialog.DijalogTackaModifikacija;
+import paint.dialog.DialogCircleDrawing;
+import paint.dialog.DialogCircleModification;
+import paint.dialog.DialogSquareModification;
+import paint.dialog.DialogSquareDrawing;
+import paint.dialog.DialogLineModification;
+import paint.dialog.DialogRectangleDrawing;
+import paint.dialog.DialogRectangleModification;
+import paint.dialog.DialogPointModification;
 import paint.geometry.Circle;
 import paint.geometry.Line;
 import paint.geometry.Point;

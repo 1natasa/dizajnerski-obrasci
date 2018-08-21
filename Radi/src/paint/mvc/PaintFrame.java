@@ -5,9 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -71,30 +74,35 @@ public class PaintFrame extends JFrame {
 		setSize(1200, 800);
 		mainPanel = new JPanel();
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		mainPanel.setLayout(new BorderLayout());
-		setContentPane(mainPanel);
 		
+		setContentPane(mainPanel);
 		
 		
 		JPanel shapeButtonsPanel = new JPanel();
 		JPanel commandsPanel = new JPanel();
-		commandsPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		//commandsPanel.setBounds(100, 100, 100, 100);
+		commandsPanel.setLayout(new GridLayout(0, 1, 0, 0) );
+		
+		
 		JPanel colorPanel = new JPanel();
 		JPanel northPanel = new JPanel();
-		
+	
 		scrollPanel = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		logTextArea = new JTextArea();	
 		scrollPanel.add(logTextArea);
-		scrollPanel.setBounds(100, 100, 500, 300);
+		scrollPanel.setPreferredSize(new Dimension(200, 200));
+		
+		mainPanel.setLayout(new BorderLayout());
+			
+		
+		
 		this.view.setBackground(Color.WHITE);
-		mainPanel.add(scrollPanel, BorderLayout.SOUTH);		
-		JPanel p = new JPanel();
-		p.add(this.view);
-		mainPanel.add(p, BorderLayout.CENTER);
+		
+		mainPanel.add(scrollPanel, BorderLayout.SOUTH);
+		mainPanel.add(this.view, BorderLayout.CENTER);
 		mainPanel.add(northPanel, BorderLayout.NORTH);
 		mainPanel.add(commandsPanel, BorderLayout.WEST);
+		
 		
 		this.view.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -105,12 +113,19 @@ public class PaintFrame extends JFrame {
 		
 		
 		btnPoint = new JToggleButton("Point");
+		
 		btnLine = new JToggleButton("Line");
+		
 		btnCircle = new JToggleButton("Circle");
+		
 		btnSqaure = new JToggleButton("Sqaure");
+		
 		btnRectangle = new JToggleButton("Rectangle");
+
 		btnHexagon = new JToggleButton("Hexagon");
+		
 		btnSelect = new JToggleButton("Select");
+		
 		
 		shapeButtonsPanel.add(btnPoint);
 		shapeButtonsPanel.add(btnLine);
@@ -119,75 +134,36 @@ public class PaintFrame extends JFrame {
 		shapeButtonsPanel.add(btnRectangle);
 		shapeButtonsPanel.add(btnHexagon);
 		shapeButtonsPanel.add(btnSelect);
+
 		
-		btnPoint.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
 		
-		btnLine.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
+		btnInsideColor = new JButton();
 		
-		btnSqaure.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
+		btnOutsideColor = new JButton();
+		btnInsideColor.setPreferredSize(new Dimension(50, 20));
+		btnOutsideColor.setPreferredSize(new Dimension(50, 20));
 		
-		btnRectangle.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
-		
-		btnHexagon.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
-		
-		btnCircle.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
-		
-		btnSelect.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			
-			}
-		});
-		
-		btnInsideColor = new JButton("Inside");
-		btnOutsideColor = new JButton("Outside");
+		btnInsideColor.setBackground(Color.WHITE);
+		btnOutsideColor.setBackground(Color.BLACK);
 		
 		btnInsideColor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			
+				controller.openInsideColorChooser();
 			}
 		});
 		
 		btnOutsideColor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-			
+				controller.openOutsideColorChooser();
 			}
 		});
 		
 		Label lblInsideColor = new Label("Inside color");
+		
 		Label lblOutsideColor = new Label("Outside color");
+		
 		colorPanel.add(lblInsideColor);
 		colorPanel.add(btnInsideColor);
 		colorPanel.add(lblOutsideColor);
@@ -202,13 +178,18 @@ public class PaintFrame extends JFrame {
 		
 		
 		btnBringToBack = new JButton("Bring to Back");
-		//btnBringToBack.setPreferredSize(new Dimension(40, 40));
+		
 		btnBringToFront = new JButton("Bring to Front");
+		
 		btnToBack = new JButton("To back");
+		
 		btnToFront = new JButton("To front");
+		
 		btnDelete = new JButton("Delete");
+	
 		btnModification = new JButton("Modification");
 	
+		
 		
 		commandsPanel.add(btnBringToBack);
 		commandsPanel.add(btnBringToFront);
@@ -246,10 +227,12 @@ public class PaintFrame extends JFrame {
 			}
 		});
 		
-		btnDelete.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnDelete.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.deleteShapes();
+				
 			}
 		});
 		
@@ -286,8 +269,15 @@ public class PaintFrame extends JFrame {
 		menuBar.add(editMenu);
 		
 		setJMenuBar(menuBar);	
-		
-		
+		ButtonGroup btnGroup = new ButtonGroup();
+		btnGroup.add(btnPoint);
+		btnGroup.add(btnLine);
+		btnGroup.add(btnCircle);
+		btnGroup.add(btnSqaure);
+		btnGroup.add(btnRectangle);
+		btnGroup.add(btnHexagon);
+		btnGroup.add(btnSelect);
+
 		
 	}
 	
@@ -327,10 +317,14 @@ public class PaintFrame extends JFrame {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-	
-	
 
-	
+	public JButton getBtnOutsideColor() {
+		return btnOutsideColor;
+	}
 
+	public JButton getBtnInsideColor() {
+		return btnInsideColor;
+	}
+	
 	
 }

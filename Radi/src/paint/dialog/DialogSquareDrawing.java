@@ -18,18 +18,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 
-public class DijalogKvadrataCrtanje extends JDialog {
+public class DialogSquareDrawing extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtDuzinaStranice;
-	private int duzinaStranice;
+	private JTextField txtSideLength;
+	private int sideLength;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			DijalogKvadrataCrtanje dialog = new DijalogKvadrataCrtanje();
+			DialogSquareDrawing dialog = new DialogSquareDrawing();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class DijalogKvadrataCrtanje extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DijalogKvadrataCrtanje() {
+	public DialogSquareDrawing() {
 		setModal(true);
 		setBounds(100, 100, 410, 126);
 		getContentPane().setLayout(new BorderLayout());
@@ -48,29 +48,29 @@ public class DijalogKvadrataCrtanje extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[120.00][73px][86px]", "[20px]"));
 		{
-			JLabel lblDuzinaStranice = new JLabel("Duzina stranice");
-			contentPanel.add(lblDuzinaStranice, "cell 1 0,alignx right,aligny bottom");
+			JLabel lblSideLength = new JLabel("Side length");
+			contentPanel.add(lblSideLength, "cell 1 0,alignx right,aligny bottom");
 		}
 		{
-			txtDuzinaStranice = new JTextField();
-			contentPanel.add(txtDuzinaStranice, "cell 2 0,alignx left,growy");
-			txtDuzinaStranice.setColumns(10);
+			txtSideLength = new JTextField();
+			contentPanel.add(txtSideLength, "cell 2 0,alignx left,growy");
+			txtSideLength.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						try {
-							duzinaStranice=Integer.parseInt(txtDuzinaStranice.getText());
-							if (duzinaStranice <= 0)
+							sideLength=Integer.parseInt(txtSideLength.getText());
+							if (sideLength <= 0)
 							{
-								System.out.println("Duzina stranice mora biti pozitivna!!");
-								JOptionPane.showMessageDialog(null, "Duzina stranice mora biti pozitivna");
+								System.out.println("Side length must be positive");
+								JOptionPane.showMessageDialog(null, "Side length must be positive");
 							}
 							else
 							{
@@ -79,8 +79,8 @@ public class DijalogKvadrataCrtanje extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							System.out.println("Nije unet broj");
-							JOptionPane.showMessageDialog(null, "Mora broj da se unese");
+							//System.out.println("Nije unet broj");
+							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 							
 							
 						}
@@ -92,10 +92,10 @@ public class DijalogKvadrataCrtanje extends JDialog {
 			}
 		}
 	}
-	public int getDuzinaStranice()
+	public int getSideLength()
 	{
 
-		return duzinaStranice;
+		return sideLength;
 	}
 
 }

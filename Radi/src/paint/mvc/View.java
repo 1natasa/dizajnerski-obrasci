@@ -17,20 +17,20 @@ public class View extends JPanel {
 	public View(Model model)
 	{
 		this.model=model;
-		
-		setBackground(Color.RED);
-		setMinimumSize(new Dimension(800, 600));
+	
 	}
 	
 	@Override
-	public void paint(Graphics g) {
+	public void paint(Graphics g) {	
+		super.paint(g);
 		for (Shape s : model.getShapes())
 		{
-			s.drawShape(g);
 			if (s instanceof SurfaceShape)
 			{
 				((SurfaceShape)s).fill(g);
 			}
+			s.drawShape(g);
+			
 		}
 	}
 	

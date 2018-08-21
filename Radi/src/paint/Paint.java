@@ -1,5 +1,7 @@
 package paint;
 
+import java.awt.geom.NoninvertibleTransformException;
+
 import javax.swing.JFrame;
 
 import paint.mvc.Controller;

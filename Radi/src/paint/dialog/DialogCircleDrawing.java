@@ -18,18 +18,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 
-public class DijalogKrugCrtanje extends JDialog {
+public class DialogCircleDrawing extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtPoluprecnik;
-	private int poluprecnik;
+	private JTextField txtRadius;
+	private int radius;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			DijalogKrugCrtanje dialog = new DijalogKrugCrtanje();
+			DialogCircleDrawing dialog = new DialogCircleDrawing();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class DijalogKrugCrtanje extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DijalogKrugCrtanje() {
+	public DialogCircleDrawing() {
 		setModal(true); 
 		setBounds(100, 100, 403, 165);
 		getContentPane().setLayout(new BorderLayout());
@@ -48,31 +48,31 @@ public class DijalogKrugCrtanje extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[92.00][58px][86px]", "[][20px]"));
 		{
-			JLabel lblPoluprecnik = new JLabel("Poluprecnik:");
-			contentPanel.add(lblPoluprecnik, "cell 1 1,alignx center,aligny center");
+			JLabel lblRadius = new JLabel("Radius:");
+			contentPanel.add(lblRadius, "cell 1 1,alignx center,aligny center");
 		}
 		{
-			txtPoluprecnik = new JTextField();
-			contentPanel.add(txtPoluprecnik, "cell 2 1,alignx left,aligny center");
-			txtPoluprecnik.setColumns(10);
+			txtRadius = new JTextField();
+			contentPanel.add(txtRadius, "cell 2 1,alignx left,aligny center");
+			txtRadius.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						try{
 							
-							poluprecnik=Integer.parseInt(txtPoluprecnik.getText());
-							System.out.println(poluprecnik);
-							if (poluprecnik <= 0)
+							radius=Integer.parseInt(txtRadius.getText());
+							System.out.println(radius);
+							if (radius <= 0)
 							{
-								System.out.println("Poluprecnik je negativan, greska");
-								JOptionPane.showMessageDialog(null, "Poluprecnik ne moze da bude negativan!");
+								//System.out.println("Poluprecnik je negativan, greska");
+								JOptionPane.showMessageDialog(null, "Radius must be positive!");
 							}
 							else
 							{
@@ -82,8 +82,8 @@ public class DijalogKrugCrtanje extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							System.out.println("nije unet broj!!!");
-							JOptionPane.showMessageDialog(null, "Greska u unosu, nije unet broj!");
+							//System.out.println("nije unet broj!!!");
+							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number!");
 						
 						}
 						
@@ -96,10 +96,10 @@ public class DijalogKrugCrtanje extends JDialog {
 		}
 	}
 	
-	public int getPoluprecnik()
+	public int getRadius()
 	{
-		System.out.println("vracam " + poluprecnik);
-		return poluprecnik;
+		
+		return radius;
 	}
 
 }

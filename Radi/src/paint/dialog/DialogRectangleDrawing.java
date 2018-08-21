@@ -17,16 +17,16 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DijalogPravougaonikCrtanje extends JDialog {
+public class DialogRectangleDrawing extends JDialog {
 
-	private final JPanel pnlDijalog = new JPanel();
-	private JTextField txtVisina;
-	private JTextField txtSirina;
+	private final JPanel pnlDialog = new JPanel();
+	private JTextField txtHeight;
+	private JTextField txtWidth;
 	private int x;
 	private int y;
-	protected int sirina;
-	protected int visina;
-	Rectangle pravougaonik=null;
+	protected int width;
+	protected int height;
+	 Rectangle rectangle=null;
 	
 
 	/**
@@ -34,7 +34,7 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			DijalogPravougaonikCrtanje dialog = new DijalogPravougaonikCrtanje();
+			DialogRectangleDrawing dialog = new DialogRectangleDrawing();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -45,41 +45,41 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DijalogPravougaonikCrtanje() {
+	public DialogRectangleDrawing() {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		pnlDijalog.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlDijalog, BorderLayout.CENTER);
-		pnlDijalog.setLayout(null);
+		pnlDialog.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlDialog, BorderLayout.CENTER);
+		pnlDialog.setLayout(null);
 		{
-			JLabel lblVisina = new JLabel("Visina:");
-			lblVisina.setBounds(97, 68, 69, 14);
-			pnlDijalog.add(lblVisina);
+			JLabel lblHeight = new JLabel("Height:");
+			lblHeight.setBounds(97, 68, 69, 14);
+			pnlDialog.add(lblHeight);
 		}
 		{
-			txtVisina = new JTextField();
-			txtVisina.setBounds(229, 65, 86, 20);
-			pnlDijalog.add(txtVisina);
-			txtVisina.setColumns(10);
+			txtHeight = new JTextField();
+			txtHeight.setBounds(229, 65, 86, 20);
+			pnlDialog.add(txtHeight);
+			txtHeight.setColumns(10);
 		}
 		{
-			JLabel lblSirina = new JLabel("Sirina:");
-			lblSirina.setBounds(97, 93, 69, 14);
-			pnlDijalog.add(lblSirina);
+			JLabel lblWidth = new JLabel("Width:");
+			lblWidth.setBounds(97, 93, 69, 14);
+			pnlDialog.add(lblWidth);
 		}
 		{
-			txtSirina = new JTextField();
-			txtSirina.setBounds(229, 96, 86, 20);
-			pnlDijalog.add(txtSirina);
-			txtSirina.setColumns(10);
+			txtWidth = new JTextField();
+			txtWidth.setBounds(229, 96, 86, 20);
+			pnlDialog.add(txtWidth);
+			txtWidth.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -88,15 +88,15 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 							
 							
 							
-							visina=Integer.parseInt(txtVisina.getText());
-							sirina=Integer.parseInt(txtSirina.getText());
+							height=Integer.parseInt(txtHeight.getText());
+							width=Integer.parseInt(txtWidth.getText());
 					
 
-						if ( visina <= 0 || sirina <=0 )
+						if ( height <= 0 || width <=0 )
 								
 						{
-							System.out.println("greska br mora biti pozitivan!!");
-							JOptionPane.showMessageDialog(null, "Greska u unosu, broj mora biti pozitivan!!");
+							//System.out.println("greska br mora biti pozitivan!!");
+							JOptionPane.showMessageDialog(null, "Wrong entry, number must be positive");
 						}
 						else
 						{
@@ -108,8 +108,8 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							System.out.println("greska pri unosu nije unet broj");
-							JOptionPane.showMessageDialog(null, "Greska pri unosu nije unet broj");
+							//System.out.println("greska pri unosu nije unet broj");
+							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 						
 					
@@ -124,11 +124,11 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 	}
 	public int  getSirina ()
 	{
-		return sirina;
+		return width;
 	}
 	public int getDuzina()
 	{
-		return visina;
+		return height;
 	}
 
 }

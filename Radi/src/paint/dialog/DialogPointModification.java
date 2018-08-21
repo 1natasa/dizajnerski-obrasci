@@ -26,20 +26,20 @@ import java.awt.Color;
 import paint.mvc.PaintFrame;
 
 
-public class DijalogTackaModifikacija extends JDialog {
+public class DialogPointModification extends JDialog {
 
-	private final JPanel pnlDugmici = new JPanel();
+	private final JPanel pnlButtons = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
 
 
 	private int x;
 	private int y;
-	private Color bojaKonture;
+	private Color outsideColor;
 	private Point newPoint;
-	private JButton btnBojaKonture;
+	private JButton btnOutsideColor;
 	
-	public DijalogTackaModifikacija(Point point) {
+	public DialogPointModification(Point point) {
 		
 		setModal(true);
 		
@@ -47,16 +47,16 @@ public class DijalogTackaModifikacija extends JDialog {
 		
 		setBounds(100, 100, 379, 226);
 		getContentPane().setLayout(new BorderLayout());
-		pnlDugmici.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlDugmici, BorderLayout.CENTER);
-		pnlDugmici.setLayout(new MigLayout("", "[][][][103px][86px]", "[][][20px][20px][]"));
+		pnlButtons.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlButtons, BorderLayout.CENTER);
+		pnlButtons.setLayout(new MigLayout("", "[][][][103px][86px]", "[][][20px][20px][]"));
 		{
-			JLabel lblX = new JLabel("Unesite x koordinatu:");
-			pnlDugmici.add(lblX, "cell 3 2,alignx right,growy");
+			JLabel lblX = new JLabel("Enter x:");
+			pnlButtons.add(lblX, "cell 3 2,alignx right,growy");
 		}
 		{
 			txtX = new JTextField();
-			pnlDugmici.add(txtX, "cell 4 2,alignx left,aligny center");
+			pnlButtons.add(txtX, "cell 4 2,alignx left,aligny center");
 			txtX.setColumns(10);
 			
 			txtX.setText("" + point.getX());
@@ -65,38 +65,38 @@ public class DijalogTackaModifikacija extends JDialog {
 		
 		}
 		{
-			JLabel lblY = new JLabel("Unesite y koordinatu:");
-			pnlDugmici.add(lblY, "cell 3 3,alignx right,aligny center");
+			JLabel lblY = new JLabel("Enter y:");
+			pnlButtons.add(lblY, "cell 3 3,alignx right,aligny center");
 		}
 		{
 			txtY = new JTextField();
-			pnlDugmici.add(txtY, "cell 4 3,alignx left,aligny center");
+			pnlButtons.add(txtY, "cell 4 3,alignx left,aligny center");
 			txtY.setColumns(10);
 			txtY.setText("" + point.getY());
 		}
 		{
-			JLabel lblBojaKonture = new JLabel("Boja konture:");
-			pnlDugmici.add(lblBojaKonture, "cell 3 4");
+			JLabel lblOutsideColor = new JLabel("Outside color:");
+			pnlButtons.add(lblOutsideColor, "cell 3 4");
 		}
 		{
-			btnBojaKonture = new JButton("");
-			btnBojaKonture.setBackground(point.getColor());
-			btnBojaKonture.addActionListener(new ActionListener() {
+			btnOutsideColor = new JButton("");
+			btnOutsideColor.setBackground(point.getColor());
+			btnOutsideColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.BLACK);
-					btnBojaKonture.setBackground(izborBoje);
+					Color chooseColor =jcc.showDialog(null, "Outside color", Color.BLACK);
+					btnOutsideColor.setBackground(chooseColor);
 				}
 			});
 			//btnBojaKonture.setBackground(Color.BLACK);
-			pnlDugmici.add(btnBojaKonture, "cell 4 4,alignx center");
+			pnlButtons.add(btnOutsideColor, "cell 4 4,alignx center");
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -109,19 +109,19 @@ public class DijalogTackaModifikacija extends JDialog {
 							
 							if (x <= 0 || y<=0 )
 							{
-								JOptionPane.showMessageDialog(null, "Koordinate moraju da budu pozitivne");
-								System.out.println("Pogresan unos, koordinate negativne");
+								JOptionPane.showMessageDialog(null, "Coordinates must be positive");
+								//System.out.println("Wrong entery, the coordinates are negative");
 							}
 							
 							else {
-								newPoint= new Point (x,y,btnBojaKonture.getBackground());
+								newPoint= new Point (x,y,btnOutsideColor.getBackground());
 								setVisible(false);
 							}
 						} catch (Exception e1) {
 							
 							
-							System.out.println("greska pri unosu nije unet broj");
-							JOptionPane.showMessageDialog(null, "Greska pri unosu nije unet broj");
+							//System.out.println("W");
+							JOptionPane.showMessageDialog(null, "Wrong enetry, must be a number");
 							
 							
 						}
@@ -134,7 +134,7 @@ public class DijalogTackaModifikacija extends JDialog {
 		}
 	}
 	
-	public Point getPodaci()
+	public Point getData()
 	{
 		return newPoint;
 	}
