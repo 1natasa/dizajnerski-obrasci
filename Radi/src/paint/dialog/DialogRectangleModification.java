@@ -37,8 +37,11 @@ public class DialogRectangleModification extends JDialog {
 	private int width;
 	private Rectangle newRectangle;
 	
+	
 
 	public DialogRectangleModification(Rectangle rectangle) {
+		
+		setTitle("Rectangle modification");
 		setModal(true);
 		setBounds(100, 100, 358, 264);
 		getContentPane().setLayout(new BorderLayout());
@@ -66,8 +69,8 @@ public class DialogRectangleModification extends JDialog {
 			txtY.setText(""+ rectangle.getTopLeftPoint().getY());
 		}
 		{
-			JLabel lblVisina = new JLabel("Height:");
-			pnlCommands.add(lblVisina, "cell 0 2,alignx right");
+			JLabel lblHeight = new JLabel("Height:");
+			pnlCommands.add(lblHeight, "cell 0 2,alignx right");
 		}
 		{
 			txtHeight = new JTextField();
@@ -76,8 +79,8 @@ public class DialogRectangleModification extends JDialog {
 			txtHeight.setText("" + rectangle.getHeight());
 		}
 		{
-			JLabel lblSirina = new JLabel("Width:");
-			pnlCommands.add(lblSirina, "cell 0 3,alignx right");
+			JLabel lblWidth = new JLabel("Width:");
+			pnlCommands.add(lblWidth, "cell 0 3,alignx right");
 		}
 		{
 			txtWidth = new JTextField();
@@ -86,8 +89,8 @@ public class DialogRectangleModification extends JDialog {
 			txtWidth.setText("" + rectangle.getWidth());
 		}
 		{
-			JLabel lblBojaKonture = new JLabel("Outside color:");
-			pnlCommands.add(lblBojaKonture, "cell 0 4,alignx right");
+			JLabel lblOutsideColor = new JLabel("Outside color:");
+			pnlCommands.add(lblOutsideColor, "cell 0 4,alignx right");
 		}
 		{
 			 btnOutsideColor = new JButton("");
@@ -95,16 +98,16 @@ public class DialogRectangleModification extends JDialog {
 			btnOutsideColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Choose outside color", Color.BLACK);
-					btnOutsideColor.setBackground(izborBoje);
+					Color chooseColor =jcc.showDialog(null, "Choose outside color", Color.BLACK);
+					btnOutsideColor.setBackground(chooseColor);
 				}
 			});
 			//btnBojaKonture.setBackground(Color.BLACK);
 			pnlCommands.add(btnOutsideColor, "cell 1 4,alignx center,growy");
 		}
 		{
-			JLabel lblBojaUnutrasnjosti = new JLabel("Inside color:");
-			pnlCommands.add(lblBojaUnutrasnjosti, "cell 0 5,alignx right");
+			JLabel lblInsideColor = new JLabel("Inside color:");
+			pnlCommands.add(lblInsideColor, "cell 0 5,alignx right");
 		}
 		{
 			 btnInsideColor = new JButton("");
@@ -121,9 +124,9 @@ public class DialogRectangleModification extends JDialog {
 			pnlCommands.add(btnInsideColor, "cell 1 5,alignx center,growy");
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
@@ -155,7 +158,7 @@ public class DialogRectangleModification extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				buttonPanel.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			

@@ -36,6 +36,7 @@ public class DialogRectangleDrawing extends JDialog {
 		try {
 			DialogRectangleDrawing dialog = new DialogRectangleDrawing();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setTitle("Drawing rectangle");
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,6 +47,8 @@ public class DialogRectangleDrawing extends JDialog {
 	 * Create the dialog.
 	 */
 	public DialogRectangleDrawing() {
+		
+		setTitle("Drawing rectangle");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -59,7 +62,7 @@ public class DialogRectangleDrawing extends JDialog {
 		}
 		{
 			txtHeight = new JTextField();
-			txtHeight.setBounds(229, 65, 86, 20);
+			txtHeight.setBounds(176, 65, 86, 20);
 			pnlDialog.add(txtHeight);
 			txtHeight.setColumns(10);
 		}
@@ -70,7 +73,7 @@ public class DialogRectangleDrawing extends JDialog {
 		}
 		{
 			txtWidth = new JTextField();
-			txtWidth.setBounds(229, 96, 86, 20);
+			txtWidth.setBounds(176, 90, 86, 20);
 			pnlDialog.add(txtWidth);
 			txtWidth.setColumns(10);
 		}

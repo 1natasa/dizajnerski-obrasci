@@ -1,35 +1,37 @@
 package paint.dialog;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class DialogCircleDrawing extends JDialog {
+public class DialogHexagonDrawing extends JDialog {
+	
+	
 
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel commandsPanel = new JPanel();
 	private JTextField txtRadius;
 	private int radius;
 
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			DialogCircleDrawing dialog = new DialogCircleDrawing();
+			DialogHexagonDrawing dialog = new DialogHexagonDrawing();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			
 			dialog.setVisible(true);
@@ -41,24 +43,26 @@ public class DialogCircleDrawing extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DialogCircleDrawing() {
-		setTitle("Drawing circle");
+	public DialogHexagonDrawing() {
 		
-		setModal(true); 
-		setBounds(100, 100, 403, 165);
+		setTitle("Drawing hexagon");
+		setModal(true);
+		setBounds(100, 100, 410, 126);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[92.00][58px][86px]", "[][20px]"));
+		commandsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(commandsPanel, BorderLayout.CENTER);
+		commandsPanel.setLayout(new MigLayout("", "[120.00][73px][86px]", "[20px]"));
+		
 		{
 			JLabel lblRadius = new JLabel("Radius:");
-			contentPanel.add(lblRadius, "cell 1 1,alignx center,aligny center");
+			commandsPanel.add(lblRadius, "cell 1 0,alignx right,aligny bottom");
 		}
 		{
 			txtRadius = new JTextField();
-			contentPanel.add(txtRadius, "cell 2 1,alignx left,aligny center");
+			commandsPanel.add(txtRadius, "cell 2 0,alignx left,growy");
 			txtRadius.setColumns(10);
 		}
+		
 		{
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -68,28 +72,25 @@ public class DialogCircleDrawing extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						try{
-							
+						try {
 							radius=Integer.parseInt(txtRadius.getText());
-							System.out.println(radius);
 							if (radius <= 0)
 							{
-								//System.out.println("Poluprecnik je negativan, greska");
-								JOptionPane.showMessageDialog(null, "Radius must be positive!");
+								System.out.println("Radius must be positive");
+								JOptionPane.showMessageDialog(null, "Radius must be positive");
 							}
 							else
 							{
-								
 								setVisible(false);
 							}
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("nije unet broj!!!");
-							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number!");
-						
+							//System.out.println("Nije unet broj");
+							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
+							
+							
 						}
-						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -97,12 +98,18 @@ public class DialogCircleDrawing extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 		}
-	}
-	
-	public int getRadius()
-	{
 		
+	}
+
+	public int getRadius() {
 		return radius;
 	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+	
+	
+	
 
 }

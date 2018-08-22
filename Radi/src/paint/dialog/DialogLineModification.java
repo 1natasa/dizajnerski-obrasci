@@ -37,7 +37,9 @@ public class DialogLineModification extends JDialog {
 	
 
 	
+	
 	public DialogLineModification(Line line) {
+		setTitle("Line modification");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

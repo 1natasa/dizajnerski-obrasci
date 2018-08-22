@@ -35,7 +35,11 @@ public class DialogSquareModification extends JDialog {
 	JButton btnInsideColor;
 	private Square newSqaure;
 	
+
+	
 	public DialogSquareModification(Square square) {
+		
+		setTitle("Square modification");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -111,9 +115,9 @@ public class DialogSquareModification extends JDialog {
 			pnlCommands.add(btnInsideColor, "cell 2 4,alignx center");
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
@@ -145,7 +149,7 @@ public class DialogSquareModification extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				buttonPanel.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 		}

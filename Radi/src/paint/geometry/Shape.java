@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public abstract class Shape {
 	private Color color = Color.BLACK;
-	private boolean selected;
+	private boolean selected=false;
 	
 	public abstract void drawShape(Graphics g);
 	public abstract void selected(Graphics g);

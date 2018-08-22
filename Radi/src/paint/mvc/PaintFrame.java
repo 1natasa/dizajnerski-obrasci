@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -24,9 +26,9 @@ import javax.swing.border.EmptyBorder;
 
 
 @SuppressWarnings("serial")
-public class PaintFrame extends JFrame {
+public class PaintFrame extends JFrame implements Observer {
 	//frame sluzi samo da prikazuje nesto, ne cuva podatke, sluzi samo da prikaze model
-	
+	//TO JE OBSERVER
 
 
 	private View view;
@@ -146,19 +148,26 @@ public class PaintFrame extends JFrame {
 		btnInsideColor.setBackground(Color.WHITE);
 		btnOutsideColor.setBackground(Color.BLACK);
 		
-		btnInsideColor.addMouseListener(new MouseAdapter() {
+	
+		btnInsideColor.addActionListener(new ActionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
 				controller.openInsideColorChooser();
 			}
 		});
 		
-		btnOutsideColor.addMouseListener(new MouseAdapter() {
+		btnOutsideColor.addActionListener(new ActionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
 				controller.openOutsideColorChooser();
 			}
 		});
+		
+		
 		
 		Label lblInsideColor = new Label("Inside color");
 		
@@ -198,35 +207,42 @@ public class PaintFrame extends JFrame {
 		commandsPanel.add(btnDelete);
 		commandsPanel.add(btnModification);
 		
-		btnBringToBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnBringToBack.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.bringToBack();
+				
 			}
 		});
 		
-		
-		btnBringToFront.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnBringToFront.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			
+				controller.bringToFront();
+				
 			}
 		});
 		
-		btnToBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnToBack.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.toBack();
+				
 			}
 		});
 		
-		btnToFront.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnToFront.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				controller.toFront();
 			}
 		});
-		
 		btnDelete.addActionListener(new ActionListener() {
 			
 			@Override
@@ -236,10 +252,12 @@ public class PaintFrame extends JFrame {
 			}
 		});
 		
-		btnModification.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnModification.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.modificationShapes();
+				
 			}
 		});
 		
@@ -277,6 +295,24 @@ public class PaintFrame extends JFrame {
 		btnGroup.add(btnRectangle);
 		btnGroup.add(btnHexagon);
 		btnGroup.add(btnSelect);
+		
+		itemUndo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				controller.undo();
+			}
+		});
+		
+		itemRedo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				controller.redo();
+			}
+		});
 
 		
 	}
@@ -324,6 +360,13 @@ public class PaintFrame extends JFrame {
 
 	public JButton getBtnInsideColor() {
 		return btnInsideColor;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//logika kad se pale kad se gase dugmici
+		//svaki put ce se pozvati kad dodje do notify 
+		
 	}
 	
 	

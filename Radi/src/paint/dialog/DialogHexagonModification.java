@@ -1,28 +1,26 @@
 package paint.dialog;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 
 import net.miginfocom.swing.MigLayout;
 import paint.geometry.Circle;
+import paint.geometry.HexagonAdapter;
 import paint.geometry.Point;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import paint.mvc.PaintFrame;
-public class DialogCircleModification extends JDialog {
-
+public class DialogHexagonModification extends JDialog{
 	
 	private JPanel pnlCommands = new JPanel();
 	private JTextField txtX;
@@ -33,13 +31,12 @@ public class DialogCircleModification extends JDialog {
 	private int radius;
 	private JButton btnOutsideColor;
 	private JButton btnInsideColor;
-	private Circle newCircle;
+	private HexagonAdapter newHexagon;
 	
 	
-
-	public DialogCircleModification(Circle circle) {
+public DialogHexagonModification(HexagonAdapter hexagon) {
 		
-		setTitle("Circle modification");
+		setTitle("Hexagon modification");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -54,7 +51,7 @@ public class DialogCircleModification extends JDialog {
 			txtX = new JTextField();
 			pnlCommands.add(txtX, "cell 4 2,alignx center");
 			txtX.setColumns(10);
-			txtX.setText(""+ circle.getCentar().getX());
+			txtX.setText(""+ hexagon.getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y coordinate of center:");
@@ -64,7 +61,7 @@ public class DialogCircleModification extends JDialog {
 			txtY = new JTextField();
 			pnlCommands.add(txtY, "cell 4 3,alignx center");
 			txtY.setColumns(10);
-			txtY.setText("" + circle.getCentar().getY());
+			txtY.setText("" + hexagon.getY());
 		}
 		{
 			JLabel lblRadius = new JLabel("Radius:");
@@ -74,7 +71,7 @@ public class DialogCircleModification extends JDialog {
 			txtRadius = new JTextField();
 			pnlCommands.add(txtRadius, "cell 4 4,alignx center");
 			txtRadius.setColumns(10);
-			txtRadius.setText("" + circle.getR());
+			txtRadius.setText("" + hexagon.getR());
 		}
 		{
 			JLabel lblOutsideColor = new JLabel("Outside color:");
@@ -82,7 +79,7 @@ public class DialogCircleModification extends JDialog {
 		}
 		{
 			 btnOutsideColor = new JButton("");
-			 btnOutsideColor.setBackground(circle.getColor());
+			 btnOutsideColor.setBackground(hexagon.getColor());
 			 btnOutsideColor.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent arg0) {
 			 		JColorChooser jcc = new JColorChooser();
@@ -99,7 +96,7 @@ public class DialogCircleModification extends JDialog {
 		}
 		{
 			 btnInsideColor = new JButton("");
-			 btnInsideColor.setBackground(circle.getInsideColor());
+			 btnInsideColor.setBackground(hexagon.getInsideColor());
 			 btnInsideColor.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		
@@ -132,7 +129,7 @@ public class DialogCircleModification extends JDialog {
 							
 							else{
 								setVisible(false);
-								newCircle= new Circle(new Point (x,y), radius, btnOutsideColor.getBackground(), btnInsideColor.getBackground());
+								newHexagon= new HexagonAdapter(new Point (x,y), radius, btnOutsideColor.getBackground(), btnInsideColor.getBackground());
 							}
 							
 						} catch (Exception e) {
@@ -149,11 +146,10 @@ public class DialogCircleModification extends JDialog {
 			}
 		}
 	}
-	
-	public Circle getData()
+
+	public HexagonAdapter getData()
 	{
-		return newCircle;
+		return newHexagon;
 	}
 
-	
 }

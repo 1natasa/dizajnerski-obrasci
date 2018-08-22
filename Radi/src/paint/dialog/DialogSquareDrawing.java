@@ -31,6 +31,7 @@ public class DialogSquareDrawing extends JDialog {
 		try {
 			DialogSquareDrawing dialog = new DialogSquareDrawing();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setTitle("Drawing square");
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,6 +42,8 @@ public class DialogSquareDrawing extends JDialog {
 	 * Create the dialog.
 	 */
 	public DialogSquareDrawing() {
+		
+		setTitle("Drawing square");
 		setModal(true);
 		setBounds(100, 100, 410, 126);
 		getContentPane().setLayout(new BorderLayout());
@@ -48,7 +51,7 @@ public class DialogSquareDrawing extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[120.00][73px][86px]", "[20px]"));
 		{
-			JLabel lblSideLength = new JLabel("Side length");
+			JLabel lblSideLength = new JLabel("Side length:");
 			contentPanel.add(lblSideLength, "cell 1 0,alignx right,aligny bottom");
 		}
 		{
@@ -57,9 +60,9 @@ public class DialogSquareDrawing extends JDialog {
 			txtSideLength.setColumns(10);
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
@@ -87,7 +90,7 @@ public class DialogSquareDrawing extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				buttonPanel.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 		}

@@ -39,12 +39,12 @@ public class DialogPointModification extends JDialog {
 	private Point newPoint;
 	private JButton btnOutsideColor;
 	
+	
+	
 	public DialogPointModification(Point point) {
 		
+		setTitle("Point modification");
 		setModal(true);
-		
-	
-		
 		setBounds(100, 100, 379, 226);
 		getContentPane().setLayout(new BorderLayout());
 		pnlButtons.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -92,9 +92,9 @@ public class DialogPointModification extends JDialog {
 			pnlButtons.add(btnOutsideColor, "cell 4 4,alignx center");
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
@@ -128,7 +128,7 @@ public class DialogPointModification extends JDialog {
 					}
 				});
 				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
+				buttonPanel.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 		}

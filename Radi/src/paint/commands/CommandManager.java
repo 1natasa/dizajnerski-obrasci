@@ -42,5 +42,24 @@ public class CommandManager {
 		return index >-1;
 	}
 	
+	public Command getCommandForUndo()
+	{
+		return this.commands.get(index);
+	}
 	
+	public Command getCommandForRedo()
+	{
+		return this.commands.get(index+1);
+		
+	}
+	
+	public void incrementIndex()
+	{
+		index++;
+	}
+	
+	public void decrementIndex()
+	{
+		index--;
+	}
 }

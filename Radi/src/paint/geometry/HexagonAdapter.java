@@ -25,13 +25,21 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 
 	@Override
 	public void drawShape(Graphics g) {
+		
 		hexagon.paint(g);
+		if(isSelected())
+		{
+			selected(g);
+		}
 		
 	}
 
 	@Override
 	public void selected(Graphics g) {
-		hexagon.setSelected(true);
+		//hexagon.setSelected(true);
+		new Line(new Point(hexagon.getX() + hexagon.getR()/2, hexagon.getY() - (int) (hexagon.getR()*1.74/2) ), new Point(hexagon.getX() - hexagon.getR()/2, hexagon.getY() + (int) (hexagon.getR()*1.74/2))).selected(g);
+		new Line(new Point(hexagon.getX() - hexagon.getR()/2, hexagon.getY() - (int) (hexagon.getR()*1.74/2) ), new Point(hexagon.getX() + hexagon.getR()/2, hexagon.getY() + (int) (hexagon.getR()*1.74/2))).selected(g);
+		new Line(new Point(hexagon.getX()-hexagon.getR(), hexagon.getY()), new Point(hexagon.getX()+hexagon.getR(), hexagon.getY())).selected(g);
 	}
 
 	@Override
