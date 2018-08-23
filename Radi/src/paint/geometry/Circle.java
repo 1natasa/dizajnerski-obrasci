@@ -2,6 +2,7 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.security.GeneralSecurityException;
 
 public class Circle extends SurfaceShape implements Moveable{
 	private Point center;
@@ -26,7 +27,7 @@ public class Circle extends SurfaceShape implements Moveable{
 	}
 
 	public String toString(){
-		return "center " + center + ", r=" + r;
+		return  "Circle" + "," + center.getX() + "," + center.getY() + "," + r+","+ getColor().getRed() + ","  + getColor().getGreen() + "," + getColor().getBlue() + "," + getInsideColor().getRed() + "," + getInsideColor().getGreen() + "," + getInsideColor().getBlue() ;
 	}
 
 	public void moveTo(int x, int y) {

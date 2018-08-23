@@ -1,6 +1,12 @@
 package paint.commands;
 
+import paint.geometry.Circle;
+import paint.geometry.HexagonAdapter;
+import paint.geometry.Line;
+import paint.geometry.Point;
+import paint.geometry.Rectangle;
 import paint.geometry.Shape;
+import paint.geometry.Square;
 import paint.mvc.Model;
 
 public class BringToFrontCommand implements Command{
@@ -34,5 +40,14 @@ public class BringToFrontCommand implements Command{
 		model.addShapeOnIndex(index, shape);
 		
 	}
+	
+	public String getDescription()
+	{
+	
+		
+		
+		return "BringToFrontCommand," + shape;
+	}
+	 
 
 }

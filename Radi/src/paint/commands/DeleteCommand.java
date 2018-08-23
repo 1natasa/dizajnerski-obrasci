@@ -1,6 +1,12 @@
 package paint.commands;
 
+import paint.geometry.Circle;
+import paint.geometry.HexagonAdapter;
+import paint.geometry.Line;
+import paint.geometry.Point;
+import paint.geometry.Rectangle;
 import paint.geometry.Shape;
+import paint.geometry.Square;
 import paint.mvc.Model;
 
 public class DeleteCommand implements Command{
@@ -28,6 +34,10 @@ public class DeleteCommand implements Command{
 		model.addShape(shape);
 	}
 	
-	
+	public String getDescription()
+	{
+		
+		return "DeleteCommand,"+shape ;
+	}
 
 }

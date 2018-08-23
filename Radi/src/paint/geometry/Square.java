@@ -36,6 +36,9 @@ public class Square extends SurfaceShape implements Moveable{
 		return diagonal().middleOfLine();
 	}
 
+	public String toString(){
+		return  "Square" + "," + topLeftPoint.getX() + "," + topLeftPoint.getY() + "," + sideLength+"," + getColor().getRed() + ","  + getColor().getGreen() + "," + getColor().getBlue() + "," + getInsideColor().getRed() + "," + getInsideColor().getGreen() + "," + getInsideColor().getBlue() ;
+	}
 
 	public void moveTo(int x, int y) {
 		topLeftPoint.setX(x);

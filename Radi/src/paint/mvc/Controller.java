@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import paint.commands.AddCommand;
@@ -31,6 +32,9 @@ import paint.geometry.Point;
 import paint.geometry.Rectangle;
 import paint.geometry.Shape;
 import paint.geometry.Square;
+import paint.serialization.LogStrategy;
+import paint.serialization.PaintStrategy;
+import paint.serialization.Strategy;
 
 public class Controller {
 	
@@ -41,8 +45,9 @@ public class Controller {
 	private Color insideColor;
 	private Color outsideColor;
 	private Point firstPointOfLine;
-	private boolean buttonClicked;
-	
+	private Strategy strategy;
+	//kontroler ce biti kontekst za strategyPattern
+	String textOfLog ="";
 	public Controller(Model model, PaintFrame frame)
 	{
 		this.model=model;
@@ -50,6 +55,10 @@ public class Controller {
 		this.insideColor=frame.getBtnInsideColor().getBackground();
 		this.outsideColor=frame.getBtnOutsideColor().getBackground();
 		this.commandManager = new CommandManager();
+		model.addObserver(frame);
+		commandManager.addObserver(frame);
+		//frejm gleda model
+		//frejm gleda i commandMe
 		
 	}
 	
@@ -64,7 +73,7 @@ public class Controller {
 			shape = new Point (x, y, outsideColor);
 			
 			
-			
+			//frame.getLogTextArea().setText("Point " + " " + x + " " + y + " " + outsideColor);
 			
 			
 	
@@ -79,7 +88,9 @@ public class Controller {
 				shape  = new Line( firstPointOfLine,secondPointOfLine,outsideColor);
 				
 				firstPointOfLine= null;
+				//frame.getLogTextArea().setText("Line " + " " + firstPointOfLine + " " + secondPointOfLine + " " + outsideColor);
 			}
+			
 			
 		}
 		
@@ -130,12 +141,16 @@ public class Controller {
 					{
 						//s.setSelected(false);
 						model.setSelection(s,false);
+						textOfLog=frame.getLogTextArea().getText()  + '\n' +  "Unselect," + s ;
+						frame.getLogTextArea().setText(textOfLog);
 					}
 					else
 					{
-						//ako sadrzi tacku i ako nije selektova, selektuj ga
+						//ako sadrzi tacku i ako nije selektovan, selektuj ga
 						//s.setSelected(true);
 						model.setSelection(s, true);
+						textOfLog=frame.getLogTextArea().getText() + '\n' + " Select," + s;
+						frame.getLogTextArea().setText(textOfLog);
 					}
 					
 					outOfShape=false;
@@ -145,9 +160,17 @@ public class Controller {
 				
 			}
 			
+			//ako je izvan oblika, odselektuj ga
 			if (outOfShape)
 			{
 				model.unselectShapes();
+				
+				for (Shape s : model.getShapes())
+				{
+					textOfLog=frame.getLogTextArea().getText()  + '\n' +  "Unselect," + s;
+					frame.getLogTextArea().setText(textOfLog);
+				}
+				
 			} 
 			
 			
@@ -159,8 +182,16 @@ public class Controller {
 			commandManager.addCommand(addCommand);
 			addCommand.execute();
 			
-			model.unselectShapes();
+			
+			System.out.println(commandManager.getAllCommands().size());
+		
+				textOfLog= frame.getLogTextArea().getText() + '\n' + addCommand.getDescription();
+				frame.getLogTextArea().setText(textOfLog);
+				
+			
 		}
+		
+		
 		frame.repaintView();
 		
 		
@@ -198,7 +229,12 @@ public class Controller {
 			DeleteCommand deleteCommand = new DeleteCommand(shape, model);
 			commandManager.addCommand(deleteCommand);
 			deleteCommand.execute();
+			
+			textOfLog= frame.getLogTextArea().getText() + '\n' + deleteCommand.getDescription();
+			frame.getLogTextArea().setText(textOfLog);
 		}
+		
+		
 		
 		frame.repaintView();
 		
@@ -223,6 +259,10 @@ public class Controller {
 					ModificationCommand modificatioCommand = new ModificationCommand(oldPoint, newPoint, model);
 					commandManager.addCommand(modificatioCommand);
 					modificatioCommand.execute();
+					
+					textOfLog= frame.getLogTextArea().getText() + '\n' + modificatioCommand.getDescription();
+					frame.getLogTextArea().setText(textOfLog);
+					
 					/*model.deleteSelectedShapes(extra);
 					Point newPoint = dialogPoint.getData();
 					model.addShape(newPoint);*/
@@ -243,6 +283,8 @@ public class Controller {
 					ModificationCommand modificationCommand = new ModificationCommand(oldLine, newLine, model);
 					commandManager.addCommand(modificationCommand);
 					modificationCommand.execute();
+					textOfLog= frame.getLogTextArea().getText() + '\n' + modificationCommand.getDescription();
+					frame.getLogTextArea().setText(textOfLog);
 				}
 			} else if(shape instanceof Rectangle)
 			{
@@ -259,6 +301,8 @@ public class Controller {
 					ModificationCommand modificationCommand = new ModificationCommand(oldRectangle, newRectangle, model);
 					commandManager.addCommand(modificationCommand);
 					modificationCommand.execute();
+					textOfLog= frame.getLogTextArea().getText() + '\n' + modificationCommand.getDescription();
+					frame.getLogTextArea().setText(textOfLog);
 				}
 			}else if (shape instanceof Square )
 			{
@@ -275,6 +319,8 @@ public class Controller {
 					ModificationCommand modificationCommand = new ModificationCommand(oldSquare, newSquare, model);
 					commandManager.addCommand(modificationCommand);
 					modificationCommand.execute();
+					textOfLog= frame.getLogTextArea().getText() + '\n' + modificationCommand.getDescription();
+					frame.getLogTextArea().setText(textOfLog);
 				}
 			}  else if (shape instanceof Circle)
 			{
@@ -291,6 +337,8 @@ public class Controller {
 					ModificationCommand modificationCommand= new ModificationCommand(oldCircle, newCircle, model);
 					commandManager.addCommand(modificationCommand);
 					modificationCommand.execute();
+					textOfLog= frame.getLogTextArea().getText() + '\n' + modificationCommand.getDescription();
+					frame.getLogTextArea().setText(textOfLog);
 				}
 			} else if (shape instanceof HexagonAdapter)
 			{
@@ -307,6 +355,8 @@ public class Controller {
 					ModificationCommand modificationCommand = new ModificationCommand(oldHexagon, newHexagon, model);
 					commandManager.addCommand(modificationCommand);
 					modificationCommand.execute();
+					textOfLog= frame.getLogTextArea().getText() + '\n' + modificationCommand.getDescription();
+					frame.getLogTextArea().setText(textOfLog);
 				}
 			}
 			
@@ -326,6 +376,9 @@ public class Controller {
 		commandManager.addCommand(toCommand);
 		toCommand.execute();
 		frame.repaintView();
+		
+		textOfLog= frame.getLogTextArea().getText() + '\n' + toCommand.getDescription();
+		frame.getLogTextArea().setText(textOfLog);
 	}
 	
 	public void toBack()
@@ -338,6 +391,9 @@ public class Controller {
 		commandManager.addCommand(toCommand);
 		toCommand.execute();
 		frame.repaintView();
+		
+		textOfLog= frame.getLogTextArea().getText() + '\n' + toCommand.getDescription();
+		frame.getLogTextArea().setText(textOfLog);
 	}
 	
 	public void bringToFront()
@@ -346,7 +402,8 @@ public class Controller {
 		commandManager.addCommand(bringToFront);
 		bringToFront.execute();
 		frame.repaintView();
-		
+		textOfLog= frame.getLogTextArea().getText() + '\n' + bringToFront.getDescription();
+		frame.getLogTextArea().setText(textOfLog);
 	}
 	
 	public void bringToBack()
@@ -355,6 +412,9 @@ public class Controller {
 		commandManager.addCommand(bringToBack);
 		bringToBack.execute();
 		frame.repaintView();
+		
+		textOfLog= frame.getLogTextArea().getText() + '\n' + bringToBack.getDescription();
+		frame.getLogTextArea().setText(textOfLog);
 				
 	}
 	
@@ -362,8 +422,12 @@ public class Controller {
 	{
 		Command command= commandManager.getCommandForUndo();
 		command.unexecute();
-		commandManager.decrementIndex();
-		frame.repaint();
+		commandManager.decrementIndex();	
+		frame.repaintView();
+		
+		textOfLog= frame.getLogTextArea().getText() + '\n' + "Undo";
+		frame.getLogTextArea().setText(textOfLog);
+		
 	}
 	
 	public void redo()
@@ -371,6 +435,66 @@ public class Controller {
 		Command command= commandManager.getCommandForRedo();
 		command.execute();
 		commandManager.incrementIndex();
-		frame.repaint();
+		frame.repaintView();
+		
+		textOfLog= frame.getLogTextArea().getText() + '\n' + "Redo";
+		frame.getLogTextArea().setText(textOfLog);
+	}
+	
+	public void saveLog()
+	{
+		JFileChooser jfc = new JFileChooser();
+		//da se otvori dialog u ondosu na frejm
+		int result =jfc.showSaveDialog(frame);
+		if (result==JFileChooser.APPROVE_OPTION)
+		{
+			String path =jfc.getSelectedFile().getPath();
+			System.out.println(jfc.getSelectedFile().getPath());
+			strategy= new LogStrategy(frame.getLogTextArea().getText(),model,commandManager);
+			strategy.save(path);
+		}
+		
+	}
+
+	public void loadLog() {
+		JFileChooser jfc = new JFileChooser();
+		//da se otvori dialog u ondosu na frejm
+		int result =jfc.showSaveDialog(frame);
+		if (result==JFileChooser.APPROVE_OPTION)
+		{
+			String path =jfc.getSelectedFile().getPath();
+			System.out.println(jfc.getSelectedFile().getPath());
+			strategy= new LogStrategy(frame.getLogTextArea().getText(),model,commandManager);
+			strategy.load(path);
+		}
+	}
+	
+	public void saveDrawing()
+	{
+		JFileChooser jfc = new JFileChooser();
+		//da se otvori dialog u ondosu na frejm
+		int result =jfc.showSaveDialog(frame);
+		if (result==JFileChooser.APPROVE_OPTION)
+		{
+			String path =jfc.getSelectedFile().getPath();
+			System.out.println(jfc.getSelectedFile().getPath());
+			strategy= new PaintStrategy();
+			strategy.save(path);
+		}
+		
+	}
+	
+	public void loadDrawing() {
+		JFileChooser jfc = new JFileChooser();
+		//da se otvori dialog u ondosu na frejm
+		int result =jfc.showSaveDialog(frame);
+		if (result==JFileChooser.APPROVE_OPTION)
+		{
+			String path =jfc.getSelectedFile().getPath();
+			System.out.println(jfc.getSelectedFile().getPath());
+			strategy= new PaintStrategy();
+			strategy.load(path);
+			//koristim vise strategija a uvek je pozivam kao save ili load
+		}
 	}
 }

@@ -62,6 +62,10 @@ public class Line extends Shape implements Moveable{
 		
 	}
 	
+	public String toString(){
+		return "Line, " + tStart.getX()+", " +tStart.getY()+", " + tEnd.getX()+", "+ tEnd.getY() +", "+ getColor().getRed() + ", " + getColor().getGreen() + ", " + getColor().getBlue();
+	}
+	
 	public boolean contains(int x, int y){
 		Point placeOfClick = new Point(x, y);
 		if(placeOfClick.distance(tStart)+placeOfClick.distance(tEnd)-this.lenght()<=0.5)

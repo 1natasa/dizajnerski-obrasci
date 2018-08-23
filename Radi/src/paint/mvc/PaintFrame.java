@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -23,6 +24,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
+
+import paint.commands.Command;
+import paint.commands.CommandManager;
 
 
 @SuppressWarnings("serial")
@@ -87,13 +91,16 @@ public class PaintFrame extends JFrame implements Observer {
 		
 		JPanel colorPanel = new JPanel();
 		JPanel northPanel = new JPanel();
-	
-		scrollPanel = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
+		JPanel southPanel = new JPanel();
+		scrollPanel = new JScrollPane(southPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPanel.setBackground(Color.RED);
 		logTextArea = new JTextArea();	
-		scrollPanel.add(logTextArea);
-		scrollPanel.setPreferredSize(new Dimension(200, 200));
+		southPanel.add(logTextArea);
 		
+		//logTextArea.setBackground(Color.LIGHT_GRAY);
+		
+		scrollPanel.setMinimumSize(new Dimension(200, 200));
+		logTextArea.setPreferredSize(new Dimension(1200, 200));
 		mainPanel.setLayout(new BorderLayout());
 			
 		
@@ -198,7 +205,12 @@ public class PaintFrame extends JFrame implements Observer {
 	
 		btnModification = new JButton("Modification");
 	
-		
+		btnBringToFront.setEnabled(false);
+		btnBringToBack.setEnabled(false);
+		btnToBack.setEnabled(false);
+		btnToFront.setEnabled(false);
+		btnModification.setEnabled(false);
+		btnDelete.setEnabled(false);
 		
 		commandsPanel.add(btnBringToBack);
 		commandsPanel.add(btnBringToFront);
@@ -268,6 +280,8 @@ public class PaintFrame extends JFrame implements Observer {
 		itemLoadLog = new JMenuItem("Load Log");
 		itemSaveLog = new JMenuItem("Save log");
 		
+		itemRedo.setEnabled(false);
+		itemUndo.setEnabled(false);
 		fileMenu = new JMenu("File");
 		fileMenu.add(itemSaveDrawing);
 		fileMenu.add(itemLoadDrawing);
@@ -313,10 +327,39 @@ public class PaintFrame extends JFrame implements Observer {
 				controller.redo();
 			}
 		});
+		
+		itemSaveLog.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				controller.saveLog();
+			}
+		});
+
+		itemLoadLog.addActionListener(new ActionListener() {
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				controller.loadLog();
+			}
+		});
 
 		
 	}
 	
+	
+	public JTextArea getLogTextArea() {
+		return logTextArea;
+	}
+
+
+	public void setLogTextArea(JTextArea logTextArea) {
+		this.logTextArea = logTextArea;
+	}
+
+
 	public void repaintView()
 	{
 		this.view.repaint();
@@ -361,13 +404,95 @@ public class PaintFrame extends JFrame implements Observer {
 	public JButton getBtnInsideColor() {
 		return btnInsideColor;
 	}
+	
+	public JMenuItem getItemRedo() {
+		return itemRedo;
+	}
+
+
+	public JMenuItem getItemUndo() {
+		return itemUndo;
+	}
+
+
 
 	@Override
 	public void update(Observable o, Object arg) {
 		//logika kad se pale kad se gase dugmici
 		//svaki put ce se pozvati kad dodje do notify 
+		if(o instanceof Model)
+		{
+			
+			
+			Model model = (Model) o;
+			int selectedNumber=model.getSelectedShapes().size();
+			
+			if(selectedNumber==1)
+			{
+				btnDelete.setEnabled(true);
+				btnModification.setEnabled(true);
+				int index=model.getIndexOfShape(model.getSelectedShapes().get(0));
+				if (index ==0)
+				{
+					btnToBack.setEnabled(false);
+					btnBringToBack.setEnabled(false);
+					btnToFront.setEnabled(true);
+					btnBringToFront.setEnabled(true);
+				} else if (index==model.getShapes().size()-1)
+				{
+					btnToBack.setEnabled(true);
+					btnBringToBack.setEnabled(true);
+					btnToFront.setEnabled(false);
+					btnBringToFront.setEnabled(false);
+				} else
+				{
+					btnToBack.setEnabled(true);
+					btnBringToBack.setEnabled(true);
+					btnToFront.setEnabled(true);
+					btnBringToFront.setEnabled(true);
+				}
+				
+			} else if (selectedNumber > 1)
+			{
+				btnModification.setEnabled(false);
+				btnDelete.setEnabled(true);
+				btnBringToBack.setEnabled(false);
+				btnBringToFront.setEnabled(false);
+				btnToBack.setEnabled(false);
+				btnToFront.setEnabled(false);
+			} else 
+			{
+				btnBringToFront.setEnabled(false);
+				btnBringToBack.setEnabled(false);
+				btnToBack.setEnabled(false);
+				btnToFront.setEnabled(false);
+				btnModification.setEnabled(false);
+				btnDelete.setEnabled(false);
+			}
+		} else 
+		{
+			CommandManager commandManager = (CommandManager) o;
+			
+			if(commandManager.canUndo())
+			{
+				itemUndo.setEnabled(true);			
+			} else
+			{
+				itemUndo.setEnabled(false);
+			}
+			if(commandManager.canRedo())
+			{
+				itemRedo.setEnabled(true);			
+			} else
+			{
+				itemRedo.setEnabled(false);
+			}
+		}
 		
 	}
+
+
+
 	
 	
 }

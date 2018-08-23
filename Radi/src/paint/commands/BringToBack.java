@@ -1,6 +1,12 @@
 package paint.commands;
 
+import paint.geometry.Circle;
+import paint.geometry.HexagonAdapter;
+import paint.geometry.Line;
+import paint.geometry.Point;
+import paint.geometry.Rectangle;
 import paint.geometry.Shape;
+import paint.geometry.Square;
 import paint.mvc.Model;
 
 public class BringToBack implements Command{
@@ -31,6 +37,13 @@ public class BringToBack implements Command{
 		
 	}
 	
+	
+	public String getDescription()
+	{
+	
+		
+		return "BringToBackCommand," + shape;
+	}
 	 
 
 }

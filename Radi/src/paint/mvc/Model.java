@@ -22,16 +22,22 @@ public class Model extends Observable{
 	public void addShape (Shape s)
 	{
 		shapes.add(s);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void addShapeOnIndex (int index, Shape s)
 	{
 		shapes.add(index, s);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void deleteShape(Shape s)
 	{
 		shapes.remove(s);
+		setChanged();
+		notifyObservers();
 	}
 	
 	
@@ -74,6 +80,7 @@ public class Model extends Observable{
 		for (Shape shape : getSelectedShapes())
 		{
 			shape.setSelected(false);
+			
 		}
 		
 		setChanged();

@@ -22,6 +22,10 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 	public void fill(Graphics g) {
 		
 	}
+	
+	public String toString(){
+		return  "Hexagon," + hexagon.getX() + "," + hexagon.getY() + "," + hexagon.getR() + "," + hexagon.getBorderColor().getRed() + ","  + hexagon.getBorderColor().getGreen() + "," + hexagon.getBorderColor().getBlue() + "," + hexagon.getAreaColor().getRed() + "," + hexagon.getAreaColor().getGreen() + "," + hexagon.getAreaColor().getBlue() ;
+	}
 
 	@Override
 	public void drawShape(Graphics g) {

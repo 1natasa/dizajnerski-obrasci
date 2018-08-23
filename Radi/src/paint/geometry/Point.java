@@ -21,7 +21,7 @@ public class Point extends Shape implements Moveable{
 	}	
 
 	public String toString(){
-		return "(" + x+ ","+ getY()+ ")" ;
+		return "Point" + "," +  x+ ","+ getY()+ "," + getColor().getRed()+"," + getColor().getGreen()+","+getColor().getBlue();
 	}
 
 	public boolean equals(Object obj){
@@ -36,6 +36,9 @@ public class Point extends Shape implements Moveable{
 			return false;
 	}
 
+	
+
+	
 	public void moveTo(int newX, int newY){
 		x = newX;
 		y = newY;

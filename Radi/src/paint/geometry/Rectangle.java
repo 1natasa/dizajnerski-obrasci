@@ -27,6 +27,10 @@ public class Rectangle extends Square{
 	public Line diagonal(){
 		return new Line(topLeftPoint, new Point(topLeftPoint.getX() + width,topLeftPoint.getY() + sideLength));
 	}
+	
+	public String toString(){
+		return  "Rectangle,"  + topLeftPoint.getX() + "," + topLeftPoint.getY() + "," + width + ","+getHeight() +","+ getColor().getRed() + ","  + getColor().getGreen() + "," + getColor().getBlue() + "," + getInsideColor().getRed() + "," + getInsideColor().getGreen() + "," + getInsideColor().getBlue() ;
+	}
 
 	public void moveTo(int x, int y) {
 		topLeftPoint.setX(x);
