@@ -24,7 +24,7 @@ public class DialogRectangleDrawing extends JDialog {
 	private JTextField txtWidth;
 	private int x;
 	private int y;
-	protected int width;
+	protected int width=-1;
 	protected int height;
 	 Rectangle rectangle=null;
 	
@@ -125,11 +125,11 @@ public class DialogRectangleDrawing extends JDialog {
 		}
 		
 	}
-	public int  getSirina ()
+	public int  getWidthRectangle ()
 	{
 		return width;
 	}
-	public int getDuzina()
+	public int getHeightRectangle()
 	{
 		return height;
 	}

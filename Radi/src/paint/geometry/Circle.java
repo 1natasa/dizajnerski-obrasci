@@ -2,9 +2,10 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.security.GeneralSecurityException;
 
-public class Circle extends SurfaceShape implements Moveable{
+public class Circle extends SurfaceShape implements Moveable,Serializable{
 	private Point center;
 	private int r;
 
@@ -51,6 +52,19 @@ public class Circle extends SurfaceShape implements Moveable{
 		else
 			return false;
 		
+	}
+	
+	
+	public boolean equals(Object obj){
+		if(obj instanceof Circle){
+			Circle extraCircle=(Circle) obj;
+			if(center.getX()==extraCircle.getCentar().getX() && center.getY()==extraCircle.getCentar().getY() && r==extraCircle.getR() && getColor().equals(extraCircle.getColor()) && getInsideColor().equals(extraCircle.getInsideColor()))
+				return true;
+			else
+				return false;
+		}
+		else 
+			return false;
 	}
 	public void selected(Graphics g) {
 		// TODO Auto-generated method stub

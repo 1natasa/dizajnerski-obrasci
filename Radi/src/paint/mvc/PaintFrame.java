@@ -328,6 +328,24 @@ public class PaintFrame extends JFrame implements Observer {
 			}
 		});
 		
+		itemSaveDrawing.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			controller.saveDrawing();
+				
+			}
+		});
+		
+		itemLoadDrawing.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			controller.loadDrawing();
+				
+			}
+		});
+		
 		itemSaveLog.addActionListener(new ActionListener() {
 			
 			@Override
@@ -348,6 +366,7 @@ public class PaintFrame extends JFrame implements Observer {
 
 		
 	}
+	
 	
 	
 	public JTextArea getLogTextArea() {
@@ -491,6 +510,10 @@ public class PaintFrame extends JFrame implements Observer {
 		
 	}
 
+	public void setModelForView(Model model)
+	{
+		this.view.setModel(model);
+	}
 
 
 	

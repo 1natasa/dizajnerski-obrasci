@@ -9,13 +9,13 @@ import paint.geometry.Shape;
 import paint.geometry.Square;
 import paint.mvc.Model;
 
-public class BringToBack implements Command{
+public class BringToBackCommand implements Command{
 	
 	private Shape shape;
 	private Model model;
 	private int index;
 
-	public BringToBack(Model model, Shape shape)
+	public BringToBackCommand(Model model, Shape shape)
 	{
 		this.model=model;
 		this.shape=shape;

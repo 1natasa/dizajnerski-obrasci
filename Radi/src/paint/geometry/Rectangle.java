@@ -2,8 +2,9 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public class Rectangle extends Square{
+public class Rectangle extends Square implements Serializable{
 	private int width;
 
 
@@ -47,11 +48,13 @@ public class Rectangle extends Square{
 	}
 
 
-
+ 
+	
+	
 	public boolean equals(Object obj){
 		if(obj instanceof Rectangle){
 			Rectangle extra=(Rectangle) obj;
-			if(this.topLeftPoint.equals(extra.topLeftPoint) && this.sideLength==extra.sideLength && this.width==extra.width)
+			if(topLeftPoint.getX()==extra.getTopLeftPoint().getX() && topLeftPoint.getY()==extra.getTopLeftPoint().getY()&& this.sideLength==extra.sideLength && this.width==extra.width && getColor().equals(extra.getColor()) && getInsideColor().equals(extra.getInsideColor()))
 				return true;
 			else
 				return false;

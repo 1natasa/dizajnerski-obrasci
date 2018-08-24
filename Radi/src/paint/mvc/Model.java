@@ -1,13 +1,15 @@
 package paint.mvc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
 import paint.geometry.Shape;
 
-public class Model extends Observable{
+public class Model extends Observable implements Serializable{
 	
+	//seriaizable omogucava da ceo objekat date klase spakujem u binarni oblik
 	//omogucavam da model bude posmatrana sa klasom observable
 	//view ce samo da uoci da se model menja, a model to mora eksplicitno da kaze da ga notificira
 	private List<Shape> shapes;
@@ -35,9 +37,18 @@ public class Model extends Observable{
 	
 	public void deleteShape(Shape s)
 	{
-		shapes.remove(s);
-		setChanged();
-		notifyObservers();
+		for(int i=0; i<shapes.size(); i++)
+		{
+			if(s.equals(shapes.get(i)))
+			{
+				shapes.remove(i);			
+				setChanged();
+				notifyObservers();
+				break;
+			}
+		}
+		
+		
 	}
 	
 	
@@ -75,16 +86,23 @@ public class Model extends Observable{
 
 	
 	
-	public void unselectShapes()
+	public List<Shape> unselectShapes()
 	{
+		List<Shape> unselectedShapes=  new ArrayList<Shape>();
 		for (Shape shape : getSelectedShapes())
 		{
-			shape.setSelected(false);
+			if(shape.isSelected())
+			{
+				shape.setSelected(false);
+				unselectedShapes.add(shape);
+			}
 			
 		}
 		
 		setChanged();
 		notifyObservers();
+		
+		return unselectedShapes;
 	}
 	
 	//pronalazak sejpa na osnovu indeksa
@@ -96,9 +114,27 @@ public class Model extends Observable{
 	
 	public void setSelection (Shape shape, boolean selected)
 	{
-		shape.setSelected(selected);
-		setChanged();
-		notifyObservers();
+		for(Shape s : shapes)
+		{
+			if(s.equals(shape))
+			{
+				s.setSelected(selected);
+				setChanged();
+				notifyObservers();
+				break;
+			}
+			
+			
+			
+			
+		}
+		
 	}
+	
+	public void clear()
+	{
+		shapes.clear();
+	}
+	
 	
 }

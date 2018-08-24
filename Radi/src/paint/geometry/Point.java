@@ -2,8 +2,9 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public class Point extends Shape implements Moveable{
+public class Point extends Shape implements Moveable,Serializable{
 	private int x;
 	private int y;
 	
@@ -24,10 +25,11 @@ public class Point extends Shape implements Moveable{
 		return "Point" + "," +  x+ ","+ getY()+ "," + getColor().getRed()+"," + getColor().getGreen()+","+getColor().getBlue();
 	}
 
+	@Override
 	public boolean equals(Object obj){
 		if(obj instanceof Point){
 			Point extraPoint=(Point) obj;
-			if(x==extraPoint.getX() && y==extraPoint.getY())
+			if(x==extraPoint.getX() && y==extraPoint.getY() && getColor().equals(extraPoint.getColor()))
 				return true;
 			else
 				return false;

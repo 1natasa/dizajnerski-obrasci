@@ -2,8 +2,9 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public class Line extends Shape implements Moveable{
+public class Line extends Shape implements Moveable,Serializable{
 	private Point tStart;
 	private Point tEnd;
 
@@ -29,7 +30,7 @@ public class Line extends Shape implements Moveable{
 	public boolean equals(Object obj){
 		if(obj instanceof Line){
 			Line extraLine=(Line) obj;
-			if(this.tStart.equals(extraLine.tStart) && this.tEnd.equals(extraLine.tEnd))
+			if(tStart.getX() == extraLine.getStart().getX() && tStart.getY()==extraLine.getStart().getY() && tEnd.getX()==extraLine.getEnd().getX()&&tEnd.getY()==extraLine.getEnd().getY()&&  this.getColor().equals(extraLine.getColor()))
 				return true;
 			else
 				return false;
@@ -63,7 +64,7 @@ public class Line extends Shape implements Moveable{
 	}
 	
 	public String toString(){
-		return "Line, " + tStart.getX()+", " +tStart.getY()+", " + tEnd.getX()+", "+ tEnd.getY() +", "+ getColor().getRed() + ", " + getColor().getGreen() + ", " + getColor().getBlue();
+		return "Line," + tStart.getX()+"," +tStart.getY()+"," + tEnd.getX()+","+ tEnd.getY() +","+ getColor().getRed() + "," + getColor().getGreen() + "," + getColor().getBlue();
 	}
 	
 	public boolean contains(int x, int y){

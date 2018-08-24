@@ -22,7 +22,7 @@ public class DialogSquareDrawing extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtSideLength;
-	private int sideLength;
+	private int sideLength=-1;
 
 	/**
 	 * Launch the application.

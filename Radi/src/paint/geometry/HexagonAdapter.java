@@ -2,10 +2,11 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
 import hexagon.Hexagon;
 
-public class HexagonAdapter extends SurfaceShape implements Moveable{
+public class HexagonAdapter extends SurfaceShape implements Moveable,Serializable{
 
 	private Hexagon hexagon;
 	
@@ -67,6 +68,18 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 		hexagon.setY(hexagon.getY()+y);
 	}
 
+
+	public boolean equals(Object obj){
+		if(obj instanceof HexagonAdapter){
+			HexagonAdapter extra=(HexagonAdapter) obj;
+			if(this.hexagon.getX()==extra.getX() && this.hexagon.getY()==extra.getY() && this.hexagon.getR()==extra.getR() && this.hexagon.getBorderColor().equals(extra.getColor()) && this.hexagon.getAreaColor().equals(extra.getInsideColor()))
+				return true;
+			else
+				return false;
+		}
+		else 
+			return false;
+	}
 	
 	public int getR ()
 	{

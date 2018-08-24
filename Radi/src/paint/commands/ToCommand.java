@@ -63,7 +63,7 @@ public class ToCommand implements Command{
 		if(startIndex>endIndex)
 		{
 			//toFront
-			return "ToFront," + startShape;
+			return "ToFrontCommand," + startShape;
 		} else
 			
 		{

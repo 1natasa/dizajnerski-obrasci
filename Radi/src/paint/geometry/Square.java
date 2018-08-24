@@ -2,8 +2,9 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public class Square extends SurfaceShape implements Moveable{
+public class Square extends SurfaceShape implements Moveable,Serializable{
 	
 	protected Point topLeftPoint;
 	protected int sideLength;
@@ -68,10 +69,11 @@ public class Square extends SurfaceShape implements Moveable{
 
 	}
 	
+	@Override
 	public boolean equals(Object obj){
 		if(obj instanceof Square){
 			Square extra=(Square) obj;
-			if(this.topLeftPoint.equals(extra.topLeftPoint) && this.sideLength==extra.sideLength)
+			if(topLeftPoint.getX()==extra.getTopLeftPoint().getX() && topLeftPoint.getY()==extra.getTopLeftPoint().getY() && this.sideLength==extra.sideLength && getColor().equals(extra.getColor()) && getInsideColor().equals(extra.getInsideColor()))
 				return true;
 			else
 				return false;

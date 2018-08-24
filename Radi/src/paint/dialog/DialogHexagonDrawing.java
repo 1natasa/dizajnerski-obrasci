@@ -23,7 +23,7 @@ public class DialogHexagonDrawing extends JDialog {
 
 	private final JPanel commandsPanel = new JPanel();
 	private JTextField txtRadius;
-	private int radius;
+	private int radius=-1;
 
 	
 	/**

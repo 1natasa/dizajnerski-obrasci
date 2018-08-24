@@ -22,7 +22,7 @@ public class DialogCircleDrawing extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtRadius;
-	private int radius;
+	private int radius=-1;
 
 	/**
 	 * Launch the application.

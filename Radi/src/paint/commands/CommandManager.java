@@ -76,4 +76,9 @@ public class CommandManager extends Observable{
 	{
 		return commands;
 	}
+	
+	public void clear()
+	{
+		commands.clear();
+	}
 }
