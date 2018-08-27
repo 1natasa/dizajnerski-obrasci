@@ -100,7 +100,7 @@ public class LogStrategy implements Strategy {
 		} else if (command.equals("DeleteCommand"))
 		{
 			Shape shape = parseShape(result);
-			DeleteCommand  deleteCommand = new DeleteCommand(shape, model);
+			DeleteCommand  deleteCommand = new DeleteCommand(model.getSelectedShapes(), model);
 			commandManager.addCommand(deleteCommand);
 			deleteCommand.execute();
 		} else if (command.equals("ModificationCommand"))

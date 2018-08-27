@@ -243,16 +243,16 @@ public class Controller {
 		{
 			return;
 		}
-		for(Shape shape : model.getSelectedShapes())
-		{
+		//for(Shape shape : model.getSelectedShapes())
+		//{
 			
-			DeleteCommand deleteCommand = new DeleteCommand(shape, model);
+			DeleteCommand deleteCommand = new DeleteCommand(model.getSelectedShapes(), model);
 			commandManager.addCommand(deleteCommand);
 			deleteCommand.execute();
 			
 			textOfLog= frame.getLogTextArea().getText() + deleteCommand.getDescription() + '\n';
 			frame.getLogTextArea().setText(textOfLog);
-		}
+		//}
 		
 		
 		
@@ -440,7 +440,9 @@ public class Controller {
 	
 	public void undo()
 	{
+		
 		Command command= commandManager.getCommandForUndo();
+		
 		command.unexecute();
 		commandManager.decrementIndex();	
 		frame.repaintView();

@@ -16,6 +16,7 @@ public class HexagonAdapter extends SurfaceShape implements Moveable,Serializabl
 		hexagon.setBorderColor(contourColor); //setBorderColor je funckija iz Hexagona
 		hexagon.setAreaColor(insideColor); //setAreaColor je funkcija iz Hexagona
 		
+		
 	}
 	
 
@@ -72,7 +73,7 @@ public class HexagonAdapter extends SurfaceShape implements Moveable,Serializabl
 	public boolean equals(Object obj){
 		if(obj instanceof HexagonAdapter){
 			HexagonAdapter extra=(HexagonAdapter) obj;
-			if(this.hexagon.getX()==extra.getX() && this.hexagon.getY()==extra.getY() && this.hexagon.getR()==extra.getR() && this.hexagon.getBorderColor().equals(extra.getColor()) && this.hexagon.getAreaColor().equals(extra.getInsideColor()))
+			if(this.hexagon.getX()==extra.getX()&& this.hexagon.getY()==extra.getY() && this.hexagon.getR()==extra.getR() && this.hexagon.getBorderColor().getRed()==extra.getColor().getRed() && this.hexagon.getBorderColor().getGreen()==extra.getColor().getGreen() &&this.hexagon.getBorderColor().getBlue()==extra.getColor().getBlue() && this.hexagon.getAreaColor().getRed()==extra.getInsideColor().getRed() && this.hexagon.getAreaColor().getGreen()==extra.getInsideColor().getGreen() && this.hexagon.getAreaColor().getBlue()==extra.getInsideColor().getBlue())
 				return true;
 			else
 				return false;

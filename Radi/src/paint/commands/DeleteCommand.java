@@ -1,5 +1,8 @@
 package paint.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import paint.geometry.Circle;
 import paint.geometry.HexagonAdapter;
 import paint.geometry.Line;
@@ -11,13 +14,13 @@ import paint.mvc.Model;
 
 public class DeleteCommand implements Command{
 	
-	private Shape shape;
+	private List<Shape> shapes;
 	private Model model;
 	
 	
-	public DeleteCommand(Shape shape, Model model)
+	public DeleteCommand(List<Shape> shapes, Model model)
 	{
-		this.shape=shape;
+		this.shapes=new ArrayList<>(shapes);
 		this.model=model;
 	}
 	
@@ -25,19 +28,25 @@ public class DeleteCommand implements Command{
 	@Override
 	public void execute() {
 		
-		model.deleteShape(shape);
+		for(Shape s : shapes)
+		{
+			model.deleteShape(s);
+		}
+		
 	}
 
 	@Override
 	public void unexecute() {
-		
-		model.addShape(shape);
+		for(Shape s : shapes)
+		{
+		model.addShape(s);
+		}
 	}
 	
 	public String getDescription()
 	{
 		
-		return "DeleteCommand,"+shape ;
+		return "DeleteCommand,"+shapes ;
 	}
 
 }
