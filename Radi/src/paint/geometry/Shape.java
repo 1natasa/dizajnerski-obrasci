@@ -2,8 +2,9 @@ package paint.geometry;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class Shape {
+public abstract class Shape implements Serializable{
 	private Color color = Color.BLACK;
 	private boolean selected=false;
 	

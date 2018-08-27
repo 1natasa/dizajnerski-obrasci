@@ -13,6 +13,17 @@ public class Model extends Observable implements Serializable{
 	//omogucavam da model bude posmatrana sa klasom observable
 	//view ce samo da uoci da se model menja, a model to mora eksplicitno da kaze da ga notificira
 	private List<Shape> shapes;
+	private String command;
+	public String getCommand() {
+		return command;
+	}
+
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
+
+
 	//skup svih objekata, model ne moze da postoji bez geometrije
 	//view budemo samo obavesten da se model promenio, a on ce nekako na to da odregauje a ne mora
 	public Model()

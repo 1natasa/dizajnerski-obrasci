@@ -48,6 +48,8 @@ public class Controller {
 	private Color outsideColor;
 	private Point firstPointOfLine;
 	private Strategy strategy;
+	
+
 	//kontroler ce biti kontekst za strategyPattern
 	String textOfLog ="";
 	public Controller(Model model, PaintFrame frame)
@@ -484,12 +486,14 @@ public class Controller {
 		{
 			commandManager.clear();
 			model.clear();
+			
 			frame.repaintView();
 			String path =jfc.getSelectedFile().getPath();
 			System.out.println(jfc.getSelectedFile().getPath());
 			strategy= new LogStrategy(frame.getLogTextArea().getText(),model,commandManager);
 			strategy.load(path);
 			LogDialog logDialog = new LogDialog((LogStrategy)strategy,frame);
+			
 			logDialog.setVisible(true);
 			frame.repaintView();
 		}
@@ -505,6 +509,7 @@ public class Controller {
 			String path =jfc.getSelectedFile().getPath();
 			System.out.println(jfc.getSelectedFile().getPath());
 			strategy= new PaintStrategy(model,this);
+			//System.out.println(model.getShapes());
 			strategy.save(path);
 		}
 		
@@ -513,16 +518,21 @@ public class Controller {
 	public void loadDrawing() {
 		JFileChooser jfc = new JFileChooser();
 		//da se otvori dialog u ondosu na frejm
+		frame.getLogTextArea().setText("");
 		int result =jfc.showOpenDialog(frame);
 		if (result==JFileChooser.APPROVE_OPTION)
 		{
+			
 			commandManager.clear();
 			model.clear();
 			String path =jfc.getSelectedFile().getPath();
 			System.out.println(jfc.getSelectedFile().getPath());
 			strategy= new PaintStrategy(model, this);
+			frame.getLogTextArea().setText(model.getCommand());;
+			System.out.println(model.getShapes());
 			strategy.load(path);
 			frame.repaintView();
+			
 			//koristim vise strategija a uvek je pozivam kao save ili load
 		}
 	}
@@ -532,5 +542,9 @@ public class Controller {
 		this.model=model;
 		this.model.addObserver(frame);
 		this.frame.setModelForView(model);
+	}
+	
+	public PaintFrame getFrame() {
+		return frame;
 	}
 }

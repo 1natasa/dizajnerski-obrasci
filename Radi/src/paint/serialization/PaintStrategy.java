@@ -33,6 +33,8 @@ public class PaintStrategy implements Strategy{
 		try {
 			 out =  new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
 			 out.writeObject(model);
+			 model.setCommand(controller.getFrame().getLogTextArea().getText());
+			 System.out.println(model.getShapes());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,6 +70,8 @@ public class PaintStrategy implements Strategy{
 			 input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(path)));
 			Model loadModel= (Model) input.readObject();
 			controller.setModel(loadModel);
+			System.out.println(loadModel.getShapes());
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

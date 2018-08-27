@@ -93,7 +93,7 @@ public class PaintFrame extends JFrame implements Observer {
 		JPanel northPanel = new JPanel();
 		JPanel southPanel = new JPanel();
 		scrollPanel = new JScrollPane(southPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPanel.setBackground(Color.RED);
+		//scrollPanel.setBackground(Color.RED);
 		logTextArea = new JTextArea();	
 		southPanel.add(logTextArea);
 		
@@ -451,13 +451,19 @@ public class PaintFrame extends JFrame implements Observer {
 				btnDelete.setEnabled(true);
 				btnModification.setEnabled(true);
 				int index=model.getIndexOfShape(model.getSelectedShapes().get(0));
-				if (index ==0)
+				if (model.getShapes().size()==1)
+				{
+					btnToBack.setEnabled(false);
+					btnBringToBack.setEnabled(false);
+					btnToFront.setEnabled(false);
+					btnBringToFront.setEnabled(false);
+				} else if (index ==0)
 				{
 					btnToBack.setEnabled(false);
 					btnBringToBack.setEnabled(false);
 					btnToFront.setEnabled(true);
 					btnBringToFront.setEnabled(true);
-				} else if (index==model.getShapes().size()-1)
+				}else if (index==model.getShapes().size()-1)
 				{
 					btnToBack.setEnabled(true);
 					btnBringToBack.setEnabled(true);

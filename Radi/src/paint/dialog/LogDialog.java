@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -27,17 +28,17 @@ public class LogDialog extends JDialog{
 	private JPanel logPanel = new JPanel();
 	private LogStrategy strategy;
 	private PaintFrame frame;
-	
+	private JScrollPane scrollPanel ;
 	
 	
 	
 	public LogDialog(LogStrategy strategy, PaintFrame frame) {
 		this.strategy=strategy;
 		this.frame=frame;
-		setTitle("Input log");
 		
+		setTitle("Input log");
 		setModal(true); 
-		setBounds(100, 100, 403, 165);
+		setBounds(100, 100, 403, 286);
 		getContentPane().setLayout(new BorderLayout());
 		commandPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(commandPanel, BorderLayout.CENTER);
@@ -45,11 +46,13 @@ public class LogDialog extends JDialog{
 		JTextArea text = new JTextArea();
 		logPanel.add(text);
 		text.setPreferredSize(new Dimension(500, 350));
-
+		
+		scrollPanel = new JScrollPane(logPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	
 		logPanel.setPreferredSize(new Dimension(500, 350));
 		logPanel.setLayout(new FlowLayout(FlowLayout.CENTER) );
 		logPanel.setBackground(Color.WHITE);
-		commandPanel.add(logPanel, "cell 0 0 3 2");
+		commandPanel.add(scrollPanel, "cell 0 0 3 2");
 		
 			JButton btnNext = new JButton("Next");
 			JButton btnAll = new JButton("All");
