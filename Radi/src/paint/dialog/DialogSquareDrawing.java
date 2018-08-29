@@ -82,7 +82,7 @@ public class DialogSquareDrawing extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("Nije unet broj");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 							
 							

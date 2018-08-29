@@ -91,8 +91,7 @@ public class DialogSquareModification extends JDialog {
 			 	}
 			 });
 			 
-			 
-			//btnBojaKonture.setBackground(Color.BLACK);
+		
 			pnlCommands.add(btnOutsideColor, "cell 2 3,alignx center");
 		}
 		{
@@ -110,8 +109,7 @@ public class DialogSquareModification extends JDialog {
 					btnInsideColor.setBackground(izborBoje);
 			 	}
 			 });
-			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
-		//	btnBojaUnutrasnjosti.setForeground(Color.BLACK);
+			
 			pnlCommands.add(btnInsideColor, "cell 2 4,alignx center");
 		}
 		{
@@ -131,7 +129,7 @@ public class DialogSquareModification extends JDialog {
 							
 							if (x<=0 || y<=0 || sideLength<=0 )
 							{
-								//System.out.println("greska pri unosu, negativni brojevi!!");
+								
 								JOptionPane.showMessageDialog(null, "Wrong entery, numbers must be positive");
 							}
 							else
@@ -142,7 +140,6 @@ public class DialogSquareModification extends JDialog {
 							
 						} catch (Exception e) {
 							
-							//System.out.println("greska pri unosu, nije unet broj");
 							JOptionPane.showMessageDialog(null, "Wrong entery, must be a number");
 						}
 						

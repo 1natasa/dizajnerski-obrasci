@@ -76,7 +76,7 @@ public class DialogHexagonDrawing extends JDialog {
 							radius=Integer.parseInt(txtRadius.getText());
 							if (radius <= 0)
 							{
-								System.out.println("Radius must be positive");
+								
 								JOptionPane.showMessageDialog(null, "Radius must be positive");
 							}
 							else
@@ -86,7 +86,7 @@ public class DialogHexagonDrawing extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("Nije unet broj");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 							
 							

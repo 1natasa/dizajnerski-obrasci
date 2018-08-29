@@ -100,8 +100,8 @@ public class DialogLineModification extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					
 					JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Choose outside color", Color.BLACK);
-					btnOutsideColor.setBackground(izborBoje);
+					Color chooseColor =jcc.showDialog(null, "Choose outside color", Color.BLACK);
+					btnOutsideColor.setBackground(chooseColor);
 				}
 			});
 			pnlCommands.add(btnOutsideColor, "cell 4 6,alignx center");
@@ -123,7 +123,7 @@ public class DialogLineModification extends JDialog {
 							
 							if (x1<=0 || y1<=0 || x2<=0 || y2<=0)
 							{
-								//System.out.println("Greska pri unosu, negativan broj");
+								
 								JOptionPane.showMessageDialog(null, "Wrong entry, number must be positive");
 							}
 							else
@@ -137,7 +137,7 @@ public class DialogLineModification extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("greska pri unosu, nije unet broj");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 					}

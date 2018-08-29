@@ -74,7 +74,7 @@ public class DialogCircleDrawing extends JDialog {
 							System.out.println(radius);
 							if (radius <= 0)
 							{
-								//System.out.println("Poluprecnik je negativan, greska");
+								
 								JOptionPane.showMessageDialog(null, "Radius must be positive!");
 							}
 							else
@@ -85,7 +85,7 @@ public class DialogCircleDrawing extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("nije unet broj!!!");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number!");
 						
 						}

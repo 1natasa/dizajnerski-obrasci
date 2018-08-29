@@ -1,5 +1,7 @@
 package paint.commands;
 
+import javax.swing.JOptionPane;
+
 import paint.geometry.Circle;
 import paint.geometry.HexagonAdapter;
 import paint.geometry.Line;
@@ -10,9 +12,6 @@ import paint.geometry.Square;
 import paint.mvc.Model;
 
 public class ToCommand implements Command{
-
-	
-	//oblik, pozicija pocetna, i krajnja
 	
 	private Model model;
 	private Shape startShape;
@@ -47,10 +46,12 @@ public class ToCommand implements Command{
 		int startIndex =  model.getIndexOfShape(startShape);
 		int endIndex = model.getIndexOfShape(endShape);
 		Shape temp= endShape;
+		model.addShapeOnIndex(endIndex, startShape);
 		model.deleteShape(endShape);
 		model.deleteShape(startShape);
-		model.addShapeOnIndex(endIndex, startShape);		
 		model.addShapeOnIndex(startIndex, endShape);
+		
+		
 		
 	}
 	

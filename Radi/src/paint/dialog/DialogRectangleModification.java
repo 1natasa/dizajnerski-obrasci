@@ -102,7 +102,7 @@ public class DialogRectangleModification extends JDialog {
 					btnOutsideColor.setBackground(chooseColor);
 				}
 			});
-			//btnBojaKonture.setBackground(Color.BLACK);
+			
 			pnlCommands.add(btnOutsideColor, "cell 1 4,alignx center,growy");
 		}
 		{
@@ -120,7 +120,7 @@ public class DialogRectangleModification extends JDialog {
 					btnInsideColor.setBackground(izborBoje);
 				}
 			});
-			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
+			
 			pnlCommands.add(btnInsideColor, "cell 1 5,alignx center,growy");
 		}
 		{
@@ -141,7 +141,7 @@ public class DialogRectangleModification extends JDialog {
 							
 							if (x<=0 || y<=0 || height<=0 || width<=0)
 							{
-								//System.out.println("Greska, broj mora biti pozitivan");
+							
 								JOptionPane.showMessageDialog(null, "Wrong entry, number must be positive");
 							}
 							
@@ -152,7 +152,7 @@ public class DialogRectangleModification extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("greska pri unosu, nije unet broj");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 					}

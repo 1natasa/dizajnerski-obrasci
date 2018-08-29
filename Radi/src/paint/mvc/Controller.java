@@ -12,10 +12,12 @@ import paint.commands.AddCommand;
 import paint.commands.BringToBackCommand;
 import paint.commands.BringToFrontCommand;
 import paint.commands.ToCommand;
+
 import paint.commands.Command;
 import paint.commands.CommandManager;
 import paint.commands.DeleteCommand;
 import paint.commands.ModificationCommand;
+
 import paint.dialog.DialogCircleDrawing;
 import paint.dialog.DialogCircleModification;
 import paint.dialog.DialogHexagonDrawing;
@@ -49,8 +51,6 @@ public class Controller {
 	private Point firstPointOfLine;
 	private Strategy strategy;
 	
-
-	//kontroler ce biti kontekst za strategyPattern
 	String textOfLog ="";
 	public Controller(Model model, PaintFrame frame)
 	{
@@ -75,11 +75,6 @@ public class Controller {
 			int x=e.getX();
 			int y=e.getY();
 			shape = new Point (x, y, outsideColor);
-			
-			
-			//frame.getLogTextArea().setText("Point " + " " + x + " " + y + " " + outsideColor);
-			
-			
 	
 		}
 		else if (frame.getBtnLine().isSelected())
@@ -92,7 +87,6 @@ public class Controller {
 				shape  = new Line( firstPointOfLine,secondPointOfLine,outsideColor);
 				
 				firstPointOfLine= null;
-				//frame.getLogTextArea().setText("Line " + " " + firstPointOfLine + " " + secondPointOfLine + " " + outsideColor);
 			}
 			
 			
@@ -201,12 +195,11 @@ public class Controller {
 			AddCommand addCommand = new AddCommand(shape, model);
 			commandManager.addCommand(addCommand);
 			addCommand.execute();
-			
-			
-			System.out.println(commandManager.getAllCommands().size());
+
+			//System.out.println(commandManager.getAllCommands().size());
 		
-				textOfLog= frame.getLogTextArea().getText()  + addCommand.getDescription() + '\n';
-				frame.getLogTextArea().setText(textOfLog);
+			textOfLog= frame.getLogTextArea().getText()  + addCommand.getDescription() + '\n';
+			frame.getLogTextArea().setText(textOfLog);
 				
 			
 		}
@@ -243,8 +236,7 @@ public class Controller {
 		{
 			return;
 		}
-		//for(Shape shape : model.getSelectedShapes())
-		//{
+
 			
 			DeleteCommand deleteCommand = new DeleteCommand(model.getSelectedShapes(), model);
 			commandManager.addCommand(deleteCommand);
@@ -252,11 +244,9 @@ public class Controller {
 			
 			textOfLog= frame.getLogTextArea().getText() + deleteCommand.getDescription() + '\n';
 			frame.getLogTextArea().setText(textOfLog);
-		//}
+
 		
-		
-		
-		frame.repaintView();
+			frame.repaintView();
 		
 	}
 
@@ -283,9 +273,6 @@ public class Controller {
 					textOfLog= frame.getLogTextArea().getText()  + modificatioCommand.getDescription() + '\n';
 					frame.getLogTextArea().setText(textOfLog);
 					
-					/*model.deleteSelectedShapes(extra);
-					Point newPoint = dialogPoint.getData();
-					model.addShape(newPoint);*/
 					
 					
 				}
@@ -399,6 +386,8 @@ public class Controller {
 		
 		textOfLog= frame.getLogTextArea().getText()  + toCommand.getDescription() + '\n';
 		frame.getLogTextArea().setText(textOfLog);
+		
+		
 	}
 	
 	public void toBack()
@@ -414,6 +403,8 @@ public class Controller {
 		
 		textOfLog= frame.getLogTextArea().getText()  + toCommand.getDescription() + '\n';
 		frame.getLogTextArea().setText(textOfLog);
+		
+		
 	}
 	
 	public void bringToFront()
@@ -466,7 +457,7 @@ public class Controller {
 	public void saveLog()
 	{
 		JFileChooser jfc = new JFileChooser();
-		//da se otvori dialog u ondosu na frejm
+		
 		int result =jfc.showSaveDialog(frame);
 		if (result==JFileChooser.APPROVE_OPTION)
 		{
@@ -482,13 +473,14 @@ public class Controller {
 		
 		
 		JFileChooser jfc = new JFileChooser();
-		//da se otvori dialog u ondosu na frejm
+		
 		int result =jfc.showOpenDialog(frame);
 		if (result==JFileChooser.APPROVE_OPTION)
 		{
 			commandManager.clear();
-			model.clear();
 			
+			model.clear();
+			frame.getLogTextArea().setText("");
 			frame.repaintView();
 			String path =jfc.getSelectedFile().getPath();
 			System.out.println(jfc.getSelectedFile().getPath());
@@ -504,7 +496,7 @@ public class Controller {
 	public void saveDrawing()
 	{
 		JFileChooser jfc = new JFileChooser();
-		//da se otvori dialog u ondosu na frejm
+		
 		int result =jfc.showSaveDialog(frame);
 		if (result==JFileChooser.APPROVE_OPTION)
 		{
@@ -530,12 +522,12 @@ public class Controller {
 			String path =jfc.getSelectedFile().getPath();
 			System.out.println(jfc.getSelectedFile().getPath());
 			strategy= new PaintStrategy(model, this);
-			frame.getLogTextArea().setText(model.getCommand());;
+			frame.getLogTextArea().setText(model.getCommand());
 			System.out.println(model.getShapes());
 			strategy.load(path);
 			frame.repaintView();
 			
-			//koristim vise strategija a uvek je pozivam kao save ili load
+			
 		}
 	}
 	

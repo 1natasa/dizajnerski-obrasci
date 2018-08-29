@@ -89,29 +89,22 @@ public class DialogRectangleDrawing extends JDialog {
 						
 						try{
 							
-							
-							
 							height=Integer.parseInt(txtHeight.getText());
 							width=Integer.parseInt(txtWidth.getText());
-					
 
-						if ( height <= 0 || width <=0 )
-								
-						{
-							//System.out.println("greska br mora biti pozitivan!!");
+						if ( height <= 0 || width <=0 )								
+						{							
 							JOptionPane.showMessageDialog(null, "Wrong entry, number must be positive");
 						}
 						else
 						{
-							
-							
 							setVisible(false);
 						}
 						
 							
 						} catch (Exception e1) {
 							
-							//System.out.println("greska pri unosu nije unet broj");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 						

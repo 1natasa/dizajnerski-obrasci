@@ -126,7 +126,7 @@ public class DialogCircleModification extends JDialog {
 							
 							if (x <=0 || y<=0 || radius<=0)
 							{
-								//System.out.println("Grska pri unosu, broj mora biti pozitivan");
+								
 								JOptionPane.showMessageDialog(null, "Wrong entry, numbers must be positive");
 							}
 							
@@ -137,7 +137,7 @@ public class DialogCircleModification extends JDialog {
 							
 						} catch (Exception e) {
 							
-							//System.out.println("greska, nije unet broj");
+							
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 						

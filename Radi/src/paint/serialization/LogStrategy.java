@@ -36,7 +36,7 @@ public class LogStrategy implements Strategy {
 	private int index=0;
 	private Model model;
 	private CommandManager commandManager;
-	//private PaintFrame frame;
+	
 	public  LogStrategy(String log, Model model, CommandManager  commandManager) {
 		this.log=log;
 		this.model=model;
@@ -154,7 +154,7 @@ public class LogStrategy implements Strategy {
 		} else if (command.equals("ToBackCommand"))
 		{
 			Shape startShape = parseShape(result);
-			int secondShapeIndex= model.getIndexOfShape(startShape)+1;
+			int secondShapeIndex= model.getIndexOfShape(startShape)-1;
 			
 			ToCommand toBack = new ToCommand(model, startShape, model.getShapeOnIndex(secondShapeIndex));
 			commandManager.addCommand(toBack);

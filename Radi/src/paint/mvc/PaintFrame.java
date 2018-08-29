@@ -31,9 +31,6 @@ import paint.commands.CommandManager;
 
 @SuppressWarnings("serial")
 public class PaintFrame extends JFrame implements Observer {
-	//frame sluzi samo da prikazuje nesto, ne cuva podatke, sluzi samo da prikaze model
-	//TO JE OBSERVER
-
 
 	private View view;
 	
@@ -93,11 +90,8 @@ public class PaintFrame extends JFrame implements Observer {
 		JPanel northPanel = new JPanel();
 		JPanel southPanel = new JPanel();
 		scrollPanel = new JScrollPane(southPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//scrollPanel.setBackground(Color.RED);
 		logTextArea = new JTextArea();	
 		southPanel.add(logTextArea);
-		
-		//logTextArea.setBackground(Color.LIGHT_GRAY);
 		
 		scrollPanel.setMinimumSize(new Dimension(200, 200));
 		logTextArea.setPreferredSize(new Dimension(1200, 200));
@@ -437,8 +431,7 @@ public class PaintFrame extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		//logika kad se pale kad se gase dugmici
-		//svaki put ce se pozvati kad dodje do notify 
+		
 		if(o instanceof Model)
 		{
 			

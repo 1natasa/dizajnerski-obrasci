@@ -87,7 +87,7 @@ public DialogHexagonModification(HexagonAdapter hexagon) {
 					btnOutsideColor.setBackground(chooseColor);
 			 	}
 			 });
-			//btnBojaKonture.setBackground(Color.BLACK);
+			
 			pnlCommands.add(btnOutsideColor, "cell 4 5,alignx center");
 		}
 		{
@@ -123,8 +123,8 @@ public DialogHexagonModification(HexagonAdapter hexagon) {
 							
 							if (x <=0 || y<=0 || radius<=0)
 							{
-								//System.out.println("Grska pri unosu, broj mora biti pozitivan");
-								JOptionPane.showMessageDialog(null, "Wrong entry, numbers must be positive");
+								
+								JOptionPane.showMessageDialog(null, "Wrong entry, number must be positive");
 							}
 							
 							else{
@@ -134,7 +134,7 @@ public DialogHexagonModification(HexagonAdapter hexagon) {
 							
 						} catch (Exception e) {
 							
-							//System.out.println("greska, nije unet broj");
+							;
 							JOptionPane.showMessageDialog(null, "Wrong entry, must be a number");
 						}
 						

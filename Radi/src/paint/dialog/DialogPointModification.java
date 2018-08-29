@@ -88,7 +88,7 @@ public class DialogPointModification extends JDialog {
 					btnOutsideColor.setBackground(chooseColor);
 				}
 			});
-			//btnBojaKonture.setBackground(Color.BLACK);
+			
 			pnlButtons.add(btnOutsideColor, "cell 4 4,alignx center");
 		}
 		{
@@ -110,7 +110,7 @@ public class DialogPointModification extends JDialog {
 							if (x <= 0 || y<=0 )
 							{
 								JOptionPane.showMessageDialog(null, "Coordinates must be positive");
-								//System.out.println("Wrong entery, the coordinates are negative");
+								
 							}
 							
 							else {
@@ -120,7 +120,6 @@ public class DialogPointModification extends JDialog {
 						} catch (Exception e1) {
 							
 							
-							//System.out.println("W");
 							JOptionPane.showMessageDialog(null, "Wrong enetry, must be a number");
 							
 							

@@ -9,11 +9,9 @@ import paint.geometry.Shape;
 
 public class Model extends Observable implements Serializable{
 	
-	//seriaizable omogucava da ceo objekat date klase spakujem u binarni oblik
-	//omogucavam da model bude posmatrana sa klasom observable
-	//view ce samo da uoci da se model menja, a model to mora eksplicitno da kaze da ga notificira
 	private List<Shape> shapes;
 	private String command;
+	
 	public String getCommand() {
 		return command;
 	}
@@ -24,8 +22,7 @@ public class Model extends Observable implements Serializable{
 	}
 
 
-	//skup svih objekata, model ne moze da postoji bez geometrije
-	//view budemo samo obavesten da se model promenio, a on ce nekako na to da odregauje a ne mora
+	
 	public Model()
 	{
 		shapes = new ArrayList<Shape>();
@@ -116,7 +113,6 @@ public class Model extends Observable implements Serializable{
 		return unselectedShapes;
 	}
 	
-	//pronalazak sejpa na osnovu indeksa
 	
 	public Shape getShapeOnIndex(int index)
 	{
@@ -134,9 +130,6 @@ public class Model extends Observable implements Serializable{
 				notifyObservers();
 				break;
 			}
-			
-			
-			
 			
 		}
 		

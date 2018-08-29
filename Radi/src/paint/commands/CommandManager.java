@@ -17,8 +17,7 @@ public class CommandManager extends Observable{
 	
 	public void addCommand(Command command)
 	{
-		//ako je indeks manji od ukupnog broja komandi znaci da smo radili neke undo
-		//primer sa salvetom hheheh :D
+		//ako je indeks manji od ukupnog broja komandi znaci da je radjen undo
 		if(index<commands.size()-1)
 		{
 			for(int i=commands.size()-1; i>index; i--)
@@ -80,5 +79,6 @@ public class CommandManager extends Observable{
 	public void clear()
 	{
 		commands.clear();
+		
 	}
 }
